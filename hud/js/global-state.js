@@ -231,4 +231,9 @@ var globalState = {
     matchFoundTimeMax: 12 * 1000,
     matchFoundButtonPressed: false,
     matchFoundDeclinePressed: false,
+
+    // Tournament
+    tournamentEnabled: true,
+    tournamentNova: 'NovaCup', // loc('tournament_novacup', 'NovaCup')
+    tournamentSubtitle: 'October 2023'
 }

@@ -24,70 +24,70 @@
     /* this is a special font that supports multiple languages */
     /* see https://www.google.com/get/noto/help/cjk/ */
     font-family: 'MenuFont_chat';
-    src: url('../fonts/NotoSansCJKtc-Bold.otf');
+    src: url('../img/fonts/NotoSansCJKtc-Bold.otf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_english';
-    src: url('../fonts/FrutigerNeue-Pro.ttf');
+    src: url('../img/fonts/FrutigerNeue-Pro.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_korean';
-    src: url('../fonts/NanumBarunGothic.ttf');
+    src: url('../img/fonts/NanumBarunGothic.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_russian';
-    src: url('../fonts/Cuprum-Bold.ttf');
+    src: url('../img/fonts/Cuprum-Bold.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_ukrainian';
-    src: url('../fonts/Cuprum-Bold.ttf');
+    src: url('../img/fonts/Cuprum-Bold.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_japanese';
-    src: url('../fonts/GenEiLateMinN_v2.ttf');
+    src: url('../img/fonts/GenEiLateMinN_v2.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_chinese_traditional';
-    src: url('../fonts/DroidSansFallback.ttf');
+    src: url('../img/fonts/DroidSansFallback.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_chinese_simplified';
-    src: url('../fonts/DroidSansFallback.ttf');
+    src: url('../img/fonts/DroidSansFallback.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_persian';
-    src: url('../fonts/Yekan.ttf');
+    src: url('../img/fonts/Yekan.ttf');
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'MenuFont_arabic';
-    src: url('../fonts/Almarai-Regular.ttf');
+    src: url('../img/fonts/Almarai-Regular.ttf');
     font-weight: normal;
     font-style: normal;
 }

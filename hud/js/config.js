@@ -1,6 +1,9 @@
 ﻿// Configurable menu items
 // ==================================================================================
 
+import BracketsRender from "./brackets-render";
+import {createElement} from "../../lib/react/react-with-addons";
+
 var loadConfig = function () {
     var Filler = React.createClass({
         propTypes: {
@@ -9,7 +12,7 @@ var loadConfig = function () {
         render: function () {
             var index = this.props.index
             return (
-                React.createElement('div', {},
+                createElement('div', {},
                     index == 0 && React.createElement('div', {},
                         "The original Legion TD went beyond our wildest dreams to become played by over a million people! "
                         + " It's now becoming a full-fledged game. The first ever competitive TD for PC."
@@ -37,7 +40,7 @@ var loadConfig = function () {
         }
     })
 
-    VideoOptions = React.createClass({
+    var VideoOptions = React.createClass({
         componentDidMount: function () {
             //console.log("video options mounted --> ask client to load options")
 
@@ -213,7 +216,7 @@ var loadConfig = function () {
         }
     })
 
-    SoundOptions = React.createClass({
+    var SoundOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -268,7 +271,7 @@ var loadConfig = function () {
         }
     })
 
-    ControlsOptions = React.createClass({
+    var ControlsOptions = React.createClass({
         getInitialState: function () {
             return {
                 hotkeyFields: []
@@ -319,7 +322,7 @@ var loadConfig = function () {
         }
     })
 
-    SocialOptions = React.createClass({
+    var SocialOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -504,7 +507,7 @@ var loadConfig = function () {
         }
     })
 
-    GameCoachOptions = React.createClass({
+    var GameCoachOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -541,7 +544,7 @@ var loadConfig = function () {
         }
     })
 
-    InterfaceOptions = React.createClass({
+    var InterfaceOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -766,7 +769,7 @@ var loadConfig = function () {
         }
     })
 
-    SystemOptions = React.createClass({
+    var SystemOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -793,14 +796,14 @@ var loadConfig = function () {
     // ==================================================================================
 
     menuUUID = 0
-    gatewayMenu = [
+    var gatewayMenu = [
         //{ key: menuUUID++, menuId: menuUUID, name: "Play Alpha", huge: true, behavior: function () { engine.trigger('alpha') } },
         //{ key: menuUUID++, menuId: menuUUID, name: "Singleplayer", huge: true, behavior: function () { engine.trigger('singlePlayer') } },
         //{ key: menuUUID++, menuId: menuUUID, name: "Options", huge: true, },
         //{ key: menuUUID++, menuId: menuUUID, name: "Quit", huge: true, behavior: function () { engine.trigger('loadPopup', 'exit') } }
     ]
 
-    getLauncherMenu = function () {
+    var getLauncherMenu = function () {
         console.log('getLauncherMenu, guildsEnabled: ' + globalState.shopEnabled + ', globalState.level: ' + globalState.level)
 
         var shopDisabledTooltip = ''
@@ -814,6 +817,7 @@ var loadConfig = function () {
         var soloAndCoopDisabled = globalState.level == 1
         var shopDisabled = shopDisabledTooltip.length > 0
         var learnDisabled = globalState.level == 1
+        var tournamentDisabled = globalState.tournamentEnabled == false
 
         var widerPatchNotes = globalState.screenWidth == 2560 && globalState.screenHeight == 1440
 
@@ -829,6 +833,10 @@ var loadConfig = function () {
             !soloAndCoopDisabled && !soloAndCoopRecommended && {
                 key: menuUUID++, menuId: menuUUID, name: "training", displayName: loc('solo_and_coop', 'Solo & Co-op'), huge: true, disabled: globalState.searchingForMatch,
                 smallText: globalState.hasNewChallenge && React.createElement('span', { className: 'smallText label' }, loc('new_challenge', 'New Challenge!'))
+            },
+            !soloAndCoopDisabled && !multiplayerDisabled && !tournamentDisabled && {
+                key: menuUUID++, menuId: menuUUID, name: "tournament", displayName: globalState.tournamentNova, huge: true, disabled: globalState.searchingForMatch,
+                smallText: globalState.tournamentSubtitle && React.createElement('span', { className: 'smallText label' }, globalState.tournamentSubtitle)
             },
             globalState.level == 1 && { key: menuUUID++, menuId: menuUUID, name: "tutorial", displayName: loc('tutorial', 'Tutorial'), huge: true, behavior: function () { engine.trigger('loadView', 'tutorial') } },
             globalState.learnMenuEnabled && !learnDisabled && { key: menuUUID++, menuId: menuUUID, name: "learn", huge: false, disabled: false, displayName: loc('learn', 'Learn'), behavior: function () { engine.trigger('loadView', 'learn') } },
@@ -910,7 +918,7 @@ var loadConfig = function () {
     }
 
     menuUUID = 0
-    getInGameMenu = function () {
+    var getInGameMenu = function () {
         var result = []
 
         if (isPauseEnabled()) {
@@ -987,7 +995,7 @@ var loadConfig = function () {
     }
 
     // new play menu
-    getPlayMenu = function () {
+    var getPlayMenu = function () {
         menuUUID = 0
         var result = []
 
@@ -1139,8 +1147,7 @@ var loadConfig = function () {
             result.push({
                 key: menuUUID++, menuId: menuUUID, name: "Arcade",
                 displayName: loc('arcade_queue', 'Featured'),
-                description: modeDescription + '<br/>' + loc('no_rating_change', 'No rating changes.')
-                    //+ modeIconsHtml
+                description: modeDescription + '<br/>' + loc('no_rating_change', 'No rating changes.')//+ modeIconsHtml
                     + "<br/> " + loc('hours_remaining', '<span style="color: #ff8800">' + hours.toFixed(1) + ' hours remaining</span>', [hours.toFixed(1)]),
                 image: "play/Featured.png", content: null, disabled: false,
                 attachedIcons: modeIcons,
@@ -1181,9 +1188,8 @@ var loadConfig = function () {
         return result
     }
 
-    getTrainingPlayMenu = function () {
-        menuUUID = 0
-        var result = []
+    menuUUID = 0
+    var getTrainingPlayMenu = function () {
 
         // todo: deprecate casualQueueDisabledTooltip - we don't have casual queue anymore, just Classic
         var casualQueueDisabledTooltip = ""
@@ -1257,10 +1263,10 @@ var loadConfig = function () {
         return result
     }
 
-    getLearnMenu = function () {
-        menuUUID = 0
-        var result = []
+    menuUUID = 0
+    var getLearnMenu = function () {
 
+        var result = []
         var showTutorialRecommendedTooltip = globalState.level <= 2
 
         result.push({
@@ -1316,7 +1322,7 @@ var loadConfig = function () {
         return result
     }
 
-    getBotsPlayMenu = function () {
+    var getBotsPlayMenu = function () {
         menuUUID = 0
         var result = []
 
@@ -1329,9 +1335,9 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "beginner_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Unranked.png", style="vertical-align: top">' + loc('unranked_ai', 'Unranked AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Unranked.png" style="vertical-align: top">' + loc('unranked_ai', 'Unranked AI'),
             description: '', //loc('beginner_bots_long', 'Practice against beginner difficulty AI opponents.'),
-            image: "play/AIBeginner.png", content: null, disabled: false,
+            image: "play/AIBeginner.png", content: null,
             disabled: globalState.level < beginnerLevelRequirement,
             disabledTooltip: (globalState.level < beginnerLevelRequirement) ? loc('bots_requirement', 'Requires level ' + beginnerLevelRequirement + '. Play against easier AI or play Classic games to level up. The tutorial also gives lots of XP!', [beginnerLevelRequirement]) : '',
             behavior: function () { engine.trigger('loadView', 'launcher'); engine.trigger('trySearchGame', 'beginnerbots') }
@@ -1339,9 +1345,9 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "very_easy_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Bronze.png", style="vertical-align: top"">' + loc('bronze_ai', 'Bronze AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Bronze.png" style="vertical-align: top"">' + loc('bronze_ai', 'Bronze AI'),
             description: '', //loc('easy_bots_long', 'Practice against easy difficulty AI opponents.'),
-            image: "play/AIVeryEasy.png", content: null, disabled: false,
+            image: "play/AIVeryEasy.png", content: null,
             disabled: globalState.level < veryEasyLevelRequirement,
             disabledTooltip: (globalState.level < veryEasyLevelRequirement) ? loc('bots_requirement', 'Requires level ' + veryEasyLevelRequirement + '. Play against easier AI or play Classic games to level up. The tutorial also gives lots of XP!', [veryEasyLevelRequirement]) : '',
             behavior: function () { engine.trigger('loadView', 'launcher'); engine.trigger('trySearchGame', 'veryeasybots') }
@@ -1349,17 +1355,17 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "easy_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Silver.png", style="vertical-align: top">' + loc('silver_ai', 'Silver AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Silver.png" style="vertical-align: top">' + loc('silver_ai', 'Silver AI'),
             description: '', //loc('easy_bots_long', 'Practice against easy difficulty AI opponents.'),
-            image: "play/AIEasy.png", content: null, disabled: false,
-            disabled: globalState.level < easyLevelRequirement,
+            image: "play/AIEasy.png",
+            content: null, disabled: (globalState.level),
             disabledTooltip: (globalState.level < easyLevelRequirement) ? loc('bots_requirement', 'Requires level ' + easyLevelRequirement + '. Play against easier AI or play Classic games to level up. The tutorial also gives lots of XP!', [easyLevelRequirement]) : '',
             behavior: function () { engine.trigger('loadView', 'launcher'); engine.trigger('trySearchGame', 'easybots') }
         })
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "medium_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Gold.png", style="vertical-align: top">' + loc('gold_ai', 'Gold AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Gold.png" style="vertical-align: top">' + loc('gold_ai', 'Gold AI'),
             description: '', // loc('medium_bots_long', 'Practice against medium difficulty AI opponents.'),
             image: "play/AIMedium.png", content: null,
             disabled: globalState.level < mediumLevelRequirement,
@@ -1369,7 +1375,7 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "hard_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Platinum.png", style="vertical-align: top">' + loc('platinum_ai', 'Platinum AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Platinum.png" style="vertical-align: top">' + loc('platinum_ai', 'Platinum AI'),
             description: '', //loc('hard_bots_long', 'Practice against hard difficulty AI opponents.'),
             image: "play/AIHard.png", content: null,
             disabled: globalState.level < hardLevelRequirement,
@@ -1379,7 +1385,7 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "diamond_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Diamond.png", style="vertical-align: top">' + loc('diamond_ai', 'Diamond AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Diamond.png" style="vertical-align: top">' + loc('diamond_ai', 'Diamond AI'),
             description: '', //loc('insane_bots_long', 'Practice against insane difficulty AI opponents.'),
             image: "play/AIInsane.png", content: null,
             disabled: globalState.level < insaneLevelRequirement,
@@ -1389,7 +1395,7 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "expert_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Expert.png", style="vertical-align: top">' + loc('expert_rank', 'Expert') + ' ' + loc('ai', 'AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Expert.png" style="vertical-align: top">' + loc('expert_rank', 'Expert') + ' ' + loc('ai', 'AI'),
             description: '', //loc('insane_bots_long', 'Practice against insane difficulty AI opponents.'),
             image: "play/AIExpert.png", content: null,
             disabled: globalState.level < insaneLevelRequirement,
@@ -1399,7 +1405,7 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "master_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Master.png", style="vertical-align: top">' + loc('master_rank', 'Master') + ' ' + loc('ai', 'AI'),
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Master.png" style="vertical-align: top">' + loc('master_rank', 'Master') + ' ' + loc('ai', 'AI'),
             description: '', //loc('insane_bots_long', 'Practice against insane difficulty AI opponents.'),
             image: "play/AIMaster.png", content: null,
             disabled: globalState.level < insaneLevelRequirement,
@@ -1409,7 +1415,7 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "senior_master_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/SeniorMaster.png", style="vertical-align: top">' + '<span style="font-size: 1.05vw">' + loc('senior_master_rank', 'Senior Master') + ' ' + loc('ai', 'AI') + '</span>',
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/SeniorMaster.png" style="vertical-align: top">' + '<span style="font-size: 1.05vw">' + loc('senior_master_rank', 'Senior Master') + ' ' + loc('ai', 'AI') + '</span>',
             description: '',
             image: "play/AISeniorMaster.png", content: null,
             disabled: globalState.level < insaneLevelRequirement,
@@ -1419,7 +1425,7 @@ var loadConfig = function () {
 
         result.push({
             key: menuUUID++, menuId: menuUUID, name: "grandmaster_bots",
-            displayName: '<img class="half-icon", src="hud/img/icons/Ranks/Grandmaster.png", style="vertical-align: top">' + '<span style="font-size: 1.05vw">' + loc('grandmaster_rank', 'Grandmaster') + ' ' + loc('ai', 'AI') + '</span>',
+            displayName: '<img class="half-icon" src="hud/img/icons/Ranks/Grandmaster.png" style="vertical-align: top">' + '<span style="font-size: 1.05vw">' + loc('grandmaster_rank', 'Grandmaster') + ' ' + loc('ai', 'AI') + '</span>',
             description: '',
             image: "play/AIGrandmaster.png", content: null,
             disabled: globalState.level < insaneLevelRequirement,
@@ -1430,7 +1436,7 @@ var loadConfig = function () {
         return result
     }
 
-    getCampaignsMenu = function () {
+    var getCampaignsMenu = function () {
         menuUUID = 0
         var result = []
 
@@ -1444,7 +1450,7 @@ var loadConfig = function () {
         return result
     }
 
-    getCampaignMenuEntry = function (mapNumber) {
+    var getCampaignMenuEntry = function (mapNumber) {
         var starsEarned = 0
         var maxStars = 0
 
@@ -1505,7 +1511,7 @@ var loadConfig = function () {
     }
 
     menuUUID = 0
-    customGameMenu = [
+    var customGameMenu = [
         {
             key: menuUUID++, menuId: menuUUID, name: "Start",
             displayName: loc('start', 'Start'),
@@ -1515,7 +1521,7 @@ var loadConfig = function () {
     ]
 
     menuUUID = 0
-    browserMenu = [
+    var browserMenu = [
         {
             key: menuUUID++, menuId: menuUUID, name: "Create",
             displayName: loc('create', 'Create'),
@@ -1524,7 +1530,22 @@ var loadConfig = function () {
         },
     ]
 
-    getPregameMenu = function () {
+    var getTournamentMenu = function() {
+        menuUUID = 0
+        return [
+            {
+                key: menuUUID++, menuId: menuUUID, name: "TournamentHome",
+                displayName: globalState.tournamentNova,
+                description: 'October 2023',
+                behavior: function () {
+                    //engine.trigger('test_SelectLegion');
+                    //engine.call('OnSelectLegion', 0)
+                }
+            },
+        ]
+    }
+
+    var getPregameMenu = function () {
         menuUUID = 0
 
         var divineDisabled = _.startsWith(globalState.clientVersion, '8.03') && !globalState.timedReleaseFeaturesActive
@@ -1852,6 +1873,11 @@ var loadConfig = function () {
         { key: menuUUID++, menuId: menuUUID, name: "Social", displayName: loc('social', 'Social'), content: React.createElement(SocialOptions, {}), narrow: true },
         { key: menuUUID++, menuId: menuUUID, name: "GameCoach", displayName: loc('game_coach', 'Game Coach'), content: React.createElement(GameCoachOptions, {}), narrow: true },
         { key: menuUUID++, menuId: menuUUID, name: "System", displayName: loc('language', 'Language'), content: React.createElement(SystemOptions, {}), narrow: true },
+    ]
+
+    menuUUID = 0
+    tournamentMenu = [
+        { key: menuUUID++, menuId: menuUUID, name: "Home", displayName: globalState.tournamentNova, content: React.createElement(BracketsRender, {}), narrow: true },
     ]
 
     menuUUID = 0

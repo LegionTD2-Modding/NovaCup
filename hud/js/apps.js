@@ -348,7 +348,7 @@ var ClientApp = React.createClass({
                     break
                 case 'launcher':
                     preloadCoreImages()
-                    parent.setState({ items: getLauncherMenu(), menuStyle: 0, menuRoot: 'launcher' }, function () { console.log("Done " + Date.now()) })
+                    //parent.setState({ items: gatewayMenu, menuStyle: 4, menuRoot: 'launcher' }, function () { console.log("Done " + Date.now()) })
                     if (!isUnityHost) engine.trigger('refreshIsInGame', false) // Smelly test code
                     break
                 case 'game':
@@ -378,6 +378,9 @@ var ClientApp = React.createClass({
                     parent.setState({ items: getCampaignsMenu(), menuStyle: 2.1 })
                     break
                 case 'initialexperience':
+                    parent.setState({ items: getInitialExperienceMenu(), menuStyle: 2.1, disableBackButton: true })
+                    break
+                case 'tournament':
                     parent.setState({ items: getInitialExperienceMenu(), menuStyle: 2.1, disableBackButton: true })
                     break
                 case 'patch notes':
@@ -431,7 +434,7 @@ var ClientApp = React.createClass({
                     parent.setState({ items: getPregameMenu(), menuStyle: 8, disableBackButton: true, narrow: true, menuRoot: 'pregame' })
                     break
                 case 'loading':
-                    parent.setState({ items: [], menuStyle: 6, disableBackButton: true, menuRoot: 'loading' })
+                    parent.setState({ items: [], menuStyle: 6, disableBackButton: true })
                     break
                 case 'browser':
                     parent.setState({ items: [], menuStyle: 7 })
@@ -445,6 +448,11 @@ var ClientApp = React.createClass({
                 case 'openingsmatchhistory':
                     parent.setState({
                         items: postGameMenu, menuStyle: 1
+                    })
+                    break
+                case 'tournament':
+                    parent.setState({
+                        items: getTournamentMenu(), menuStyle: 1, enableApplyButton: true, menuRoot: 'tournament'
                     })
                     break
                 case 'postgame':
@@ -988,7 +996,7 @@ var PopupApp = React.createClass({
             globalState.lastPopupName = popupName
 
             parent.setState({
-                name: popupName, header: "", description: "", items: okMenu, hasInput: false, hasParagraphInput: false, hasLoader: false, onSubmit: function () { },
+                name: popupName, header: "", description: "", items: [], hasInput: false, hasParagraphInput: false, hasLoader: false, onSubmit: function () { },
                 customFullScreenBackground: '', customHeaderStyle: {}, customDescriptionStyle: {}, customInputStyle: {}, multipleChoiceItems: [], multipleChoiceItemsDisplay: [],
                 customClasses: '', customParagraphStyle: {}, defaultInputValue: "", checkboxText: "", onCheckboxClicked: function () { },
             })
@@ -1539,9 +1547,7 @@ var PopupApp = React.createClass({
                     parent.setState({
                         header: '<img src="hud/img/brand/logo.png"><br/>' + loc('connecting_to_steam', 'Connecting to Steam'),
                         description: '',
-                        items: createCancelMenu(function () {
-                            engine.trigger('quitApplication')
-                        }),
+                        items: [],
                         hasLoader: true
                     })
                     break
@@ -1556,7 +1562,9 @@ var PopupApp = React.createClass({
                 case 'connectingtoalpha':
                 case 'connectingtosingleplayer':
                     parent.setState({
-                        header: loc('connecting_to_steam', 'Connecting to Steam'), description: "", items: createCancelMenu(function () {
+                        header: loc('connecting_to_steam', 'Connecting to Steam'),
+                        description: "",
+                        items: createCancelMenu(function () {
                             engine.trigger('disconnectFromServer')
                             engine.trigger('loadView', 'gateway')
                         }),
