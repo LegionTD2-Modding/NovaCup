@@ -4,26 +4,26 @@
 //import BracketsRender from "./brackets-render";
 //import {createElement} from "lib/react/react-with-addons";
 
-var loadConfig = function () {
-    var Filler = React.createClass({
+loadConfig = function () {
+    Filler = React.createClass({
         propTypes: {
             index: React.PropTypes.number
         },
         render: function () {
-            var index = this.props.index
+            index = this.props.index
             return (
                 React.createElement('div', {},
-                    index == 0 && React.createElement('div', {},
+                    index === 0 && React.createElement('div', {},
                         "The original Legion TD went beyond our wildest dreams to become played by over a million people! "
                         + " It's now becoming a full-fledged game. The first ever competitive TD for PC."
                     ),
-                    index == 1 && React.createElement('div', {},
+                    index === 1 && React.createElement('div', {},
                         "Legion TD 2 is an online free-to-play game that will be available on Steam. "
                         + "It's free-to-play, but not pay-to-win. It's the standalone successor to Legion TD, "
                         + "the hugely popular Warcraft III mod that became the inspiration for StarCraft II's Squadron TD "
                         + "and Dota 2's Legion TD: Reborn. "
                     ),
-                    index == 2 && React.createElement('div', {},
+                    index === 2 && React.createElement('div', {},
                         "A Legion TD 2 match is played by two teams of four players on a symmetric playing field, "
                         + "each side consisting of four lanes and a throne room. Each player defends their own lane "
                         + "against waves of enemy creatures that threaten the team's king. The team whose king survives longer, "
@@ -40,7 +40,7 @@ var loadConfig = function () {
         }
     })
 
-    var VideoOptions = React.createClass({
+    VideoOptions = React.createClass({
         componentDidMount: function () {
             //console.log("video options mounted --> ask client to load options")
 
@@ -216,7 +216,7 @@ var loadConfig = function () {
         }
     })
 
-    var SoundOptions = React.createClass({
+    SoundOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -271,14 +271,14 @@ var loadConfig = function () {
         }
     })
 
-    var ControlsOptions = React.createClass({
+    ControlsOptions = React.createClass({
         getInitialState: function () {
             return {
                 hotkeyFields: []
             }
         },
         componentWillMount: function () {
-            var parent = this
+            parent = this
             bindings.refreshHotkeyList = function (hotkeyFieldsList) {
                 parent.setState({ hotkeyFields: hotkeyFieldsList })
             }
@@ -287,7 +287,7 @@ var loadConfig = function () {
                 engine.trigger('refreshHotkeyList', testHotkeysList)
         },
         render: function () {
-            var parent = this
+            parent = this
             return (
                 React.createElement('ul', { className: 'options-container' },
                     React.createElement('h1', { style: { color: "white" } }, loc('adjust_controls', 'Adjust Controls')),
@@ -309,7 +309,7 @@ var loadConfig = function () {
                         }, loc('clear_all_hotkeys_button', 'Click to clear all hotkeys'))
                     ),
                     parent.state.hotkeyFields.map(function (item) {
-                        var locFieldName = convertDisplayNameToApexId(item.description)
+                        locFieldName = convertDisplayNameToApexId(item.description)
                         return React.createElement('li', {},
                             React.createElement('div', { className: 'description' }, loc(locFieldName, item.description)),
                             React.createElement('div', { className: 'value' },
@@ -322,7 +322,7 @@ var loadConfig = function () {
         }
     })
 
-    var SocialOptions = React.createClass({
+    SocialOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -460,7 +460,7 @@ var loadConfig = function () {
                         )
                     ),
                     globalState.emoteChooserItems.map(function (item, index) {
-                        var filename = item.image.replace(/^.*[\\\/]/, '')
+                        filename = item.image.replace(/^.*[\\\/]/, '')
                         //console.log('emoji filename: ' + filename)
                         return React.createElement('li', {},
                             React.createElement('div', {
@@ -507,7 +507,7 @@ var loadConfig = function () {
         }
     })
 
-    var GameCoachOptions = React.createClass({
+    GameCoachOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -544,7 +544,7 @@ var loadConfig = function () {
         }
     })
 
-    var InterfaceOptions = React.createClass({
+    InterfaceOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -769,7 +769,7 @@ var loadConfig = function () {
         }
     })
 
-    var SystemOptions = React.createClass({
+    SystemOptions = React.createClass({
         render: function () {
             return (
                 React.createElement('ul', { className: 'options-container' },
@@ -796,30 +796,30 @@ var loadConfig = function () {
     // ==================================================================================
 
     menuUUID = 0
-    var gatewayMenu = [
+    gatewayMenu = [
         //{ key: menuUUID++, menuId: menuUUID, name: "Play Alpha", huge: true, behavior: function () { engine.trigger('alpha') } },
         //{ key: menuUUID++, menuId: menuUUID, name: "Singleplayer", huge: true, behavior: function () { engine.trigger('singlePlayer') } },
         //{ key: menuUUID++, menuId: menuUUID, name: "Options", huge: true, },
         //{ key: menuUUID++, menuId: menuUUID, name: "Quit", huge: true, behavior: function () { engine.trigger('loadPopup', 'exit') } }
     ]
 
-    var getLauncherMenu = function () {
+    getLauncherMenu = function () {
         console.log('getLauncherMenu, guildsEnabled: ' + globalState.shopEnabled + ', globalState.level: ' + globalState.level)
 
-        var shopDisabledTooltip = ''
+        shopDisabledTooltip = ''
         if (!globalState.shopEnabled)
             shopDisabledTooltip = loc('feature_disabled', 'This feature is disabled')
         //if (globalState.freeAccount)
         //    shopDisabledTooltip = loc('requires_paid_account', 'Requires paid account')
 
-        var multiplayerDisabled = globalState.level == 1
-        var soloAndCoopRecommended = globalState.level == 2
-        var soloAndCoopDisabled = globalState.level == 1
+        var multiplayerDisabled = globalState.level === 1
+        var soloAndCoopRecommended = globalState.level === 2
+        var soloAndCoopDisabled = globalState.level === 1
         var shopDisabled = shopDisabledTooltip.length > 0
-        var learnDisabled = globalState.level == 1
-        var tournamentDisabled = globalState.tournamentEnabled == false
+        var learnDisabled = globalState.level === 1
+        var tournamentDisabled = globalState.tournamentEnabled === false
 
-        var widerPatchNotes = globalState.screenWidth == 2560 && globalState.screenHeight == 1440
+        var widerPatchNotes = globalState.screenWidth === 2560 && globalState.screenHeight === 1440
 
         return [
             !multiplayerDisabled && {
@@ -838,15 +838,15 @@ var loadConfig = function () {
                 key: menuUUID++, menuId: menuUUID, name: "tournament", displayName: globalState.tournamentNova, huge: true, disabled: globalState.searchingForMatch,
                 smallText: globalState.tournamentSubtitle && React.createElement('span', { className: 'smallText label' }, globalState.tournamentSubtitle)
             },
-            globalState.level == 1 && { key: menuUUID++, menuId: menuUUID, name: "tutorial", displayName: loc('tutorial', 'Tutorial'), huge: true, behavior: function () { engine.trigger('loadView', 'tutorial') } },
+            globalState.level === 1 && { key: menuUUID++, menuId: menuUUID, name: "tutorial", displayName: loc('tutorial', 'Tutorial'), huge: true, behavior: function () { engine.trigger('loadView', 'tutorial') } },
             globalState.learnMenuEnabled && !learnDisabled && { key: menuUUID++, menuId: menuUUID, name: "learn", huge: false, disabled: false, displayName: loc('learn', 'Learn'), behavior: function () { engine.trigger('loadView', 'learn') } },
             { key: menuUUID++, menuId: menuUUID, name: "profile", huge: false, disabled: false, displayName: loc('profile', 'Profile'), smallText: globalState.hasNewItems && React.createElement('span', { className: 'smallText label' }, loc('new_item', 'New!')), behavior: function () { engine.trigger('loadView', 'myprofile') } },
             !multiplayerDisabled && { key: menuUUID++, menuId: menuUUID, name: "leaderboards", displayName: loc('leaderboards', 'Leaderboards'), huge: false, disabled: false },
-            globalState.level != 1 && {
+            globalState.level !== 1 && {
                 key: menuUUID++, menuId: menuUUID, name: "store", displayName: loc('store', 'Shop'), disabled: shopDisabled, huge: false, tooltip: shopDisabledTooltip,
                 smallText: globalState.novaBoostActive && React.createElement('span', { className: 'smallText label' }, locName('nova_boost', 'Nova Boost!'))
             },
-            globalState.level != 1 && {
+            globalState.level !== 1 && {
                 key: menuUUID++, menuId: menuUUID, name: "guild", displayName: loc('guild', 'Guild'), disabled: !globalState.shopEnabled, behavior: function () {
                     if (globalState.refreshMyGuildVitalsCalledYet) {
                         loadMyGuildProfile()
@@ -918,8 +918,8 @@ var loadConfig = function () {
     }
 
     menuUUID = 0
-    var getInGameMenu = function () {
-        var result = []
+    getInGameMenu = function () {
+        result = []
 
         if (isPauseEnabled()) {
             result.push({
@@ -931,12 +931,12 @@ var loadConfig = function () {
             })
         }
 
-        var isCampaign = globalState.missionId != '' && !_.startsWith(globalState.missionId, 'tutorial')
+        isCampaign = globalState.missionId !== '' && !_.startsWith(globalState.missionId, 'tutorial')
 
         // v8.04 later can enable for other modes, maybe. Although campaign seems to be the main use-case, since it's more like a puzzle
         // whereas Play vs. AI you kinda wanna simulate a real game (and get essence, etc anyways)
 
-        if (globalState.matchmakerQueue == 'Custom' && isCampaign) {
+        if (globalState.matchmakerQueue === 'Custom' && isCampaign) {
             
             if (globalState.gameTimeElapsedSeconds >= 1200) {
                 result.push({
@@ -947,7 +947,7 @@ var loadConfig = function () {
                 result.push({
                     key: menuUUID++, menuId: menuUUID, name: "restart", displayName: loc('restart_available_before_wave', 'Restart available before wave 21'), disabled: true, extraClasses: 'restart-button-disabled', behavior: function () { }
                 })
-            } else if (globalState.waveNumber == 1) {
+            } else if (globalState.waveNumber === 1) {
                 result.push({
                     key: menuUUID++, menuId: menuUUID, name: "restart", displayName: loc('restart_available_after_wave', 'Restart available after wave 1'), disabled: true, extraClasses: 'restart-button-disabled', behavior: function () { }
                 })
@@ -995,9 +995,9 @@ var loadConfig = function () {
     }
 
     // new play menu
-    var getPlayMenu = function () {
+    getPlayMenu = function () {
         menuUUID = 0
-        var result = []
+        result = []
 
         var normalQueueDisabledTooltip = ""
         if (globalState.level < 2 && !globalState.disablePracticeGames)
@@ -1026,7 +1026,7 @@ var loadConfig = function () {
                 key: menuUUID++, menuId: menuUUID, name: "Ranked",
                 displayName: loc('ranked_queue', 'Ranked'),
                 description: loc('ranked_queue_long', '2v2 mastermind-only, match against similarly skilled players.'),
-                image: "play/Ranked.png", content: null, disabled: normalQueueDisabledTooltip != "",
+                image: "play/Ranked.png", content: null, disabled: normalQueueDisabledTooltip !== "",
                 disabledTooltip: normalQueueDisabledTooltip,
                 behavior: function () { engine.trigger('loadView', 'launcher'); engine.trigger('trySearchGame', 'normal') },
                 attachedIcons: normalIcons,
@@ -1044,7 +1044,7 @@ var loadConfig = function () {
                 key: menuUUID++, menuId: menuUUID, name: "Normal",
                 displayName: loc('normal_queue', 'Normal'),
                 description: loc('normal_queue_long', 'Match against players of all skill levels. No rating changes.'),
-                image: "play/Ranked.png", content: null, disabled: normalQueueDisabledTooltip != "",
+                image: "play/Ranked.png", content: null, disabled: normalQueueDisabledTooltip !== "",
                 disabledTooltip: normalQueueDisabledTooltip,
                 behavior: function () { engine.trigger('loadView', 'launcher'); engine.trigger('trySearchGame', 'normal') }
             })
@@ -1086,7 +1086,7 @@ var loadConfig = function () {
         //    //    + "<br/>" + loc('hours_remaining', '<span style="color: #ff8800">' + goldRushHours.toFixed(1) + ' hours remaining</span>', [goldRushHours.toFixed(1)])
         //}
 
-        if (globalState.hotModeIndex != -1) {
+        if (globalState.hotModeIndex !== -1) {
             classicIcons.push('hud/img/icons/ClassicModes/' + globalState.hotModeIndex + '.png')
 
             classicExtraDescription = "<br/> " + '<span style="color: #ffcc00">'
@@ -1108,12 +1108,12 @@ var loadConfig = function () {
             displayName: loc('classic_queue', 'Classic'),
             description: loc('classic_queue_long', '4v4 vs. players of all skill levels.<br>Party up to 8 players.') + classicExtraDescription,
             //+ ' <span style="color: #8ff110; text-transform: uppercase">' + loc('new_item', 'New!') + '</span>',
-            image: "play/Classic.png", content: null, disabled: classicQueueDisabledTooltip != "",
+            image: "play/Classic.png", content: null, disabled: classicQueueDisabledTooltip !== "",
             disabledTooltip: classicQueueDisabledTooltip,
             //yellowTooltip: classicWarningTooltip ,
             //yellowTooltipTitle: classicWarningTooltip == '' ? '' : loc('caution', 'Caution'),
             redTooltip: classicWarningTooltip ,
-            redTooltipTitle: classicWarningTooltip == '' ? '' : loc('warning', 'Warning'),
+            redTooltipTitle: classicWarningTooltip === '' ? '' : loc('warning', 'Warning'),
             attachedIcons: classicIcons,
             behavior: function () { engine.trigger('loadView', 'launcher'); engine.trigger('trySearchGame', 'classic') }
         })
@@ -1189,7 +1189,7 @@ var loadConfig = function () {
     }
 
     menuUUID = 0
-    var getTrainingPlayMenu = function () {
+    getTrainingPlayMenu = function () {
 
         // todo: deprecate casualQueueDisabledTooltip - we don't have casual queue anymore, just Classic
         var casualQueueDisabledTooltip = ""
@@ -1217,7 +1217,7 @@ var loadConfig = function () {
         }
 
         var showCampaignRecommendedTooltip = globalState.level <= 3
-        if (globalState.campaignEnabled && globalState.level != 1) {
+        if (globalState.campaignEnabled && globalState.level !== 1) {
             result.push({
                 key: menuUUID++, menuId: menuUUID,
                 name: "campaign",
@@ -1264,9 +1264,9 @@ var loadConfig = function () {
     }
 
     menuUUID = 0
-    var getLearnMenu = function () {
+    getLearnMenu = function () {
 
-        var result = []
+        result = []
         var showTutorialRecommendedTooltip = globalState.level <= 2
 
         result.push({
@@ -1322,9 +1322,9 @@ var loadConfig = function () {
         return result
     }
 
-    var getBotsPlayMenu = function () {
+    getBotsPlayMenu = function () {
         menuUUID = 0
-        var result = []
+        result = []
 
         var beginnerLevelRequirement = 2
         var veryEasyLevelRequirement = 2
@@ -1436,9 +1436,9 @@ var loadConfig = function () {
         return result
     }
 
-    var getCampaignsMenu = function () {
+    getCampaignsMenu = function () {
         menuUUID = 0
-        var result = []
+        result = []
 
         result.push(getCampaignMenuEntry(1))
         result.push(getCampaignMenuEntry(2))
@@ -1450,7 +1450,7 @@ var loadConfig = function () {
         return result
     }
 
-    var getCampaignMenuEntry = function (mapNumber) {
+    getCampaignMenuEntry = function (mapNumber) {
         var starsEarned = 0
         var maxStars = 0
 
@@ -1460,7 +1460,7 @@ var loadConfig = function () {
             maxStars = globalState.campaignMaxStarsPerMap[mapNumber]
 
         var ownedDlc = _.includes(globalState.campaignDlcOwned, 'Campaign' + mapNumber)
-        if (mapNumber == 1) // Campaign 1 is included in the base game
+        if (mapNumber === 1) // Campaign 1 is included in the base game
             ownedDlc = true
 
         console.log('ownedDlc: ' + ownedDlc + ', mapNumber: ' + mapNumber)
@@ -1488,14 +1488,14 @@ var loadConfig = function () {
             displayName: locName('campaign_' + mapNumber, 'Map ' + mapNumber),
             description: (maxStars > 0) ? loc('campaign_' + mapNumber, 'Description for map ' + mapNumber)
                 + '<br><br><img class="campaign-star-icon" src="hud/img/icons/Campaign/star.png"/> <span class="campaign-menu-stars" style="font-size: 1.25rem">' + starsEarned + '/' + maxStars + '</span>' : '',
-            image: (maxStars == 0) ? "campaign/CampaignDisabled.png" : "campaign/Campaign" + mapNumber + ".png", content: null, disabled: (maxStars == 0),
-            disabledTooltip: (maxStars == 0) ? loc('coming_soon', 'Coming soon!') : '',
-            greenTooltip: mapNumber == 2 ? globalState.freeCampaign2Tooltip : '',
-            greenTooltipTitle: mapNumber == 2 ? globalState.freeCampaign2Title : '',
+            image: (maxStars === 0) ? "campaign/CampaignDisabled.png" : "campaign/Campaign" + mapNumber + ".png", content: null, disabled: (maxStars === 0),
+            disabledTooltip: (maxStars === 0) ? loc('coming_soon', 'Coming soon!') : '',
+            greenTooltip: mapNumber === 2 ? globalState.freeCampaign2Tooltip : '',
+            greenTooltipTitle: mapNumber === 2 ? globalState.freeCampaign2Title : '',
             behavior: function () {
                 console.log('click campaign ' + mapNumber)
 
-                if (maxStars == 0) {
+                if (maxStars === 0) {
                     console.log('no max stars yet, probably this map is not yet released so bail')
                     return
                 }
@@ -1511,7 +1511,7 @@ var loadConfig = function () {
     }
 
     menuUUID = 0
-    var customGameMenu = [
+    customGameMenu = [
         {
             key: menuUUID++, menuId: menuUUID, name: "Start",
             displayName: loc('start', 'Start'),
@@ -1521,7 +1521,7 @@ var loadConfig = function () {
     ]
 
     menuUUID = 0
-    var browserMenu = [
+    browserMenu = [
         {
             key: menuUUID++, menuId: menuUUID, name: "Create",
             displayName: loc('create', 'Create'),
@@ -1530,7 +1530,7 @@ var loadConfig = function () {
         },
     ]
 
-    var getTournamentMenu = function() {
+    getTournamentMenu = function() {
         menuUUID = 0
         return [
             {
@@ -1545,7 +1545,7 @@ var loadConfig = function () {
         ]
     }
 
-    var getPregameMenu = function () {
+    getPregameMenu = function () {
         menuUUID = 0
 
         var divineDisabled = _.startsWith(globalState.clientVersion, '8.03') && !globalState.timedReleaseFeaturesActive
@@ -1557,8 +1557,8 @@ var loadConfig = function () {
                 displayName: locName('element_legion_id', 'Element'),
                 description: loc('element_legion_id', 'Wield forces of nature older than life itself.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 0,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 0 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 0,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 0 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Element0.png", inverted: false,
                 mouseoverImage: "legionselect/Element1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 0) }
@@ -1568,8 +1568,8 @@ var loadConfig = function () {
                 displayName: locName('forsaken_legion_id', 'Forsaken'),
                 description: loc('forsaken_legion_id', 'Command the walking dead from an ancient kingdom.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 1,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 1 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 1,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 1 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Forsaken0.png", inverted: false,
                 mouseoverImage: "legionselect/Forsaken1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 1) }
@@ -1579,8 +1579,8 @@ var loadConfig = function () {
                 displayName: locName('grove_legion_id', 'Grove'),
                 description: loc('grove_legion_id', 'Bewitch your enemies with enchanted flora and fauna.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 2,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 2 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 2,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 2 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Grove0.png", inverted: false,
                 mouseoverImage: "legionselect/Grove1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 2) }
@@ -1590,8 +1590,8 @@ var loadConfig = function () {
                 displayName: locName('mech_legion_id', 'Mech'),
                 description: loc('mech_legion_id', 'Reign supreme with advanced technology.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 3,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 3 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 3,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 3 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Mech0.png", inverted: false,
                 mouseoverImage: "legionselect/Mech1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 3) }
@@ -1601,8 +1601,8 @@ var loadConfig = function () {
                 displayName: locName('atlantean_legion_id', 'Atlantean'),
                 description: loc('atlantean_legion_id', 'Unleash fearsome monsters from the depths of the sea.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 5,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 5 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 5,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 5 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Atlantean0.png", inverted: false,
                 mouseoverImage: "legionselect/Atlantean1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 5) }
@@ -1612,8 +1612,8 @@ var loadConfig = function () {
                 displayName: locName('nomad_legion_id', 'Nomad'),
                 description: loc('nomad_legion_id', 'Fight as an alliance of beasts from the badlands.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 6,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 6 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 6,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 6 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Nomad0.png", inverted: false,
                 mouseoverImage: "legionselect/Nomad1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 6) }
@@ -1623,8 +1623,8 @@ var loadConfig = function () {
                 displayName: locName('shrine_legion_id', 'Shrine'),
                 description: loc('shrine_legion_id', 'Find redemption from the curse of the afterlife.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 7,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 7 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 7,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 7 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Shrine0.png", inverted: false,
                 mouseoverImage: "legionselect/Shrine1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 7) }
@@ -1634,8 +1634,8 @@ var loadConfig = function () {
                 displayName: locName('divine_legion_id', 'Divine'),
                 description: loc('divine_legion_id', 'Bring transgressors to justice with a holy order.'), content: null,
                 descriptionClass: 'billboard-description-compact ',
-                disabled: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 8,
-                disabledTooltip: globalState.forcePickLegionIndex != -1 && globalState.forcePickLegionIndex != 8 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
+                disabled: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 8,
+                disabledTooltip: globalState.forcePickLegionIndex !== -1 && globalState.forcePickLegionIndex !== 8 ? loc('select_different_legion_for_mission', 'Select a different legion for this mission.') : '',
                 image: "legionselect/Divine0.png", inverted: false,
                 mouseoverImage: "legionselect/Divine1.png",
                 behavior: function () { engine.trigger('test_SelectLegion'); engine.call('OnSelectLegion', 8) }
@@ -1679,11 +1679,11 @@ var loadConfig = function () {
 
     getProfileMenu = function () {
         menuUUID = 0
-        var result = []
+        result = []
 
         //console.log('getProfileMenu ' + globalState.lastProfilePlayFabId)
         // In case later we want to hide some stuff for non-self profiles..
-        var isSelf = globalState.lastProfilePlayFabId == globalState.playFabId
+        var isSelf = globalState.lastProfilePlayFabId === globalState.playFabId
 
         // in theory we could check if you have new masteries here...?
         var hasMasteryReward = false
@@ -1710,7 +1710,7 @@ var loadConfig = function () {
 
     getGuildMenu = function () {
         menuUUID = 0
-        var result = []
+        result = []
 
         result.push({ key: menuUUID++, menuId: menuUUID, name: "Info", displayName: loc('guild_overview', 'Guild Info'), narrow: true, content: React.createElement(GuildOverview) })
 
@@ -1838,7 +1838,7 @@ var loadConfig = function () {
 
     getLeaderboardsMenu = function () {
         menuUUID = 0
-        var result = []
+        result = []
 
         result.push({ key: menuUUID++, menuId: menuUUID, name: "Rank", displayName: loc('leaderboard_rank', 'Rank'), narrow: true, content: React.createElement(LeaderboardTab, { statsList: ['overallEloThisSeasonAtLeastOneGamePlayed', 'overallPeakEloThisSeasonAtLeastOneGamePlayed', 'overallPeakElo', 'rankedWinsThisSeason', 'classicWinsThisSeason', 'vipOverallPeakElo', 'vipTotalMatchmadeWins', 'eventPoints', 'ladderPoints'] }) })
         result.push({ key: menuUUID++, menuId: menuUUID, name: "Top Games", displayName: locName('leaderboard_top_games', 'Top Games'), narrow: true, content: React.createElement(LeaderboardOpenings) })
@@ -2005,8 +2005,8 @@ var loadConfig = function () {
     ]
 
     okWithCallbackMenu = function (callbackId) {
-        var menuUUID = 0
-        var menu = [
+        menuUUID = 0
+        menu = [
             {
                 key: menuUUID++, menuId: menuUUID, name: "Ok",
                 displayName: loc('ok', 'Ok'),
@@ -2443,7 +2443,7 @@ var loadConfig = function () {
 
     // Helper
     amIPartyLeader = function () {
-        return globalState.partyLeader == globalState.playFabId && globalState.partyLeaderEnabled
+        return globalState.partyLeader === globalState.playFabId && globalState.partyLeaderEnabled
     }
 
     rightClickChatPersonMenu = function () {
@@ -2453,7 +2453,7 @@ var loadConfig = function () {
         var amILeader = amIPartyLeader()
         var isInParty = _.includes(globalState.partyPlayFabIds, playFabId)
         var isInFriends = _.includes(globalState.friendPlayFabIds, playFabId)
-        var isSelf = playFabId == globalState.playFabId
+        var isSelf = playFabId === globalState.playFabId
         var isMuted = _.includes(globalState.mutedPlayers, displayName.toLowerCase())
 
         console.log('playFabId: ' + playFabId + ", displayName: " + displayName + ", partyLeader: " + globalState.partyLeader)
@@ -2537,11 +2537,11 @@ var loadConfig = function () {
                 key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild',
                 displayName: loc('invite_to_guild', 'Invite to guild'),
                 behavior: function () {
-                    if (globalState.myGuildName == '') return
+                    if (globalState.myGuildName === '') return
 
                     engine.trigger('sendGuildInvite', displayName)
                 },
-                disabled: globalState.myGuildName == ''
+                disabled: globalState.myGuildName === ''
             })
 
             // Add friend
@@ -2604,7 +2604,7 @@ var loadConfig = function () {
         var amILeader = amIPartyLeader()
         var isInParty = _.includes(globalState.partyPlayFabIds, playFabId)
         var isInFriends = _.includes(globalState.friendPlayFabIds, playFabId)
-        var isSelf = playFabId == globalState.playFabId
+        var isSelf = playFabId === globalState.playFabId
         var isMuted = _.includes(globalState.mutedPlayers, displayName.toLowerCase())
 
         if (!isSelf) {
@@ -2620,7 +2620,7 @@ var loadConfig = function () {
             displayName: loc('view_profile', 'View Profile'),
             disabled: false, behavior: function () {
                 // v2.30
-                if (globalState.currentView != 'profile')
+                if (globalState.currentView !== 'profile')
                     engine.trigger('setMenuRoot', globalState.currentView)
                 engine.trigger('viewProfile', playFabId)
             }
@@ -2638,11 +2638,11 @@ var loadConfig = function () {
             key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild',
             displayName: loc('invite_to_guild', 'Invite to guild'),
             behavior: function () {
-                if (globalState.myGuildName == '') return
+                if (globalState.myGuildName === '') return
 
                 engine.trigger('sendGuildInvite', displayName)
             },
-            disabled: globalState.myGuildName == ''
+            disabled: globalState.myGuildName === ''
         })
 
         // Add friend
@@ -2802,11 +2802,11 @@ var loadConfig = function () {
         var amILeader = amIPartyLeader()
         var isInParty = _.includes(globalState.partyPlayFabIds, playFabId)
         var isInFriends = _.includes(globalState.friendPlayFabIds, playFabId)
-        var isSelf = playFabId == globalState.playFabId
+        var isSelf = playFabId === globalState.playFabId
 
         return [
             { key: menuUUID++, menuId: menuUUID, name: 'Invite To Party', displayName: loc('invite_to_party', 'Invite To Party'), disabled: isInParty, behavior: function () { engine.trigger('sendPartyInvite', globalState.contextMenuDisplayTarget) } },
-            { key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName == '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } },
+            { key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName === '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } },
             { key: menuUUID++, menuId: menuUUID, name: 'Send Message', displayName: loc('send_message', 'Send Message'), disabled: false, behavior: function () { engine.call("OnWhisper", globalState.contextMenuDisplayTarget) } },
             { key: menuUUID++, menuId: menuUUID, name: 'View Profile', displayName: loc('view_profile', 'View Profile'), disabled: false, behavior: function () { engine.trigger('viewProfile', globalState.contextMenuTarget) } },
             //{ key: menuUUID++, menuId: menuUUID, name: 'Add To Favorites', displayName: loc('add_to_favorites', 'Add To Favorites'), disabled: true, behavior: function () { engine.trigger('loadPopup', 'wip') } },
@@ -2833,7 +2833,7 @@ var loadConfig = function () {
 
         return [
             { key: menuUUID++, menuId: menuUUID, name: 'Invite To Game', displayName: loc('invite_to_game', 'Invite To Game'), disabled: true, behavior: function () { /* Can't invite offline people to game */ } },
-            { key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName == '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } },
+            { key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName === '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } },
             { key: menuUUID++, menuId: menuUUID, name: 'Send Message', displayName: loc('send_message', 'Send Message'), disabled: false, behavior: function () { engine.call("OnWhisper", globalState.contextMenuDisplayTarget) } },
             { key: menuUUID++, menuId: menuUUID, name: 'View Profile', displayName: loc('view_profile', 'View Profile'), disabled: false, behavior: function () { engine.trigger('viewProfile', globalState.contextMenuTarget) } },
             //{ key: menuUUID++, menuId: menuUUID, name: 'Add To Favorites', displayName: loc('add_to_favorites', 'Add To Favorites'), disabled: true, behavior: function () { engine.trigger('loadPopup', 'wip') } },
@@ -2849,7 +2849,7 @@ var loadConfig = function () {
         return [
             // v8.03.8 temporarily disabled for now until we can test it properly.
             //{ key: menuUUID++, menuId: menuUUID, name: 'Invite To Game', displayName: loc('invite_to_game', 'Invite To Game'), disabled: false, behavior: function () { engine.call('OnRichInviteToGame', globalState.contextMenuTarget) } },
-            { key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName == '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } },
+            { key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName === '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } },
             { key: menuUUID++, menuId: menuUUID, name: 'Send Message', displayName: loc('send_message', 'Send Message'), disabled: false, behavior: function () { engine.call("OnWhisper", globalState.contextMenuDisplayTarget) } },
             { key: menuUUID++, menuId: menuUUID, name: 'View Profile', displayName: loc('view_profile', 'View Profile'), disabled: false, behavior: function () { engine.trigger('viewProfile', globalState.contextMenuTarget) } },
             //{ key: menuUUID++, menuId: menuUUID, name: 'Add To Favorites', displayName: loc('add_to_favorites', 'Add To Favorites'), disabled: true, behavior: function () { engine.trigger('loadPopup', 'wip') } },
@@ -2902,16 +2902,16 @@ var loadConfig = function () {
         var amILeader = amIPartyLeader()
         var isInParty = _.includes(globalState.partyPlayFabIds, playFabId)
         var isInFriends = _.includes(globalState.friendPlayFabIds, playFabId)
-        var isSelf = playFabId == globalState.playFabId
+        var isSelf = playFabId === globalState.playFabId
         var isAlreadyReported = _.includes(globalState.reportedPlayers, playFabId)
-        var isPostgame = globalState.currentView == 'postgame' // to differentiate from matchhistory
+        var isPostgame = globalState.currentView === 'postgame' // to differentiate from matchhistory
 
         console.log("Right click post game user: " + playFabId + ", currentView: " + globalState.currentView)
 
         var result = []
 
         result.push({ key: menuUUID++, menuId: menuUUID, name: 'Invite To Party', displayName: loc('invite_to_party', 'Invite To Party'), disabled: isInParty, behavior: function () { engine.trigger('sendPartyInvite', globalState.contextMenuDisplayTarget) } })
-        result.push({ key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName == '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } })
+        result.push({ key: menuUUID++, menuId: menuUUID, name: 'Invite To Guild', displayName: loc('invite_to_guild', 'Invite To Guild'), disabled: globalState.myGuildName === '', behavior: function () { engine.trigger('sendGuildInvite', displayName) } })
         result.push({ key: menuUUID++, menuId: menuUUID, name: 'View Profile', displayName: loc('view_profile', 'View Profile'), disabled: false, behavior: function () { engine.trigger('viewPostGameProfile', globalState.contextMenuTarget) } })
         result.push({ key: menuUUID++, menuId: menuUUID, name: 'Add Friend', displayName: loc('add_friend', 'Add Friend'), disabled: isInFriends, behavior: function () { engine.trigger('sendFriendRequest', globalState.contextMenuDisplayTarget) } })
 
@@ -2952,8 +2952,8 @@ var loadConfig = function () {
     rightClickScoreboardNameMenu = function () {
         var playFabId = globalState.contextMenuTarget
         var isInFriends = _.includes(globalState.friendPlayFabIds, playFabId)
-        var isBot = _.startsWith(playFabId, '_bot') || playFabId == 'Blank'
-        var isSelf = playFabId == globalState.playFabId
+        var isBot = _.startsWith(playFabId, '_bot') || playFabId === 'Blank'
+        var isSelf = playFabId === globalState.playFabId
         //var isAlreadyReported = _.includes(globalState.reportedPlayers, playFabId)
         var isAlreadyReported = false // v1.60 just allow dual reporting, especially since you could have different reasons
 
@@ -2971,7 +2971,7 @@ var loadConfig = function () {
         var playFabId = globalState.contextMenuTarget
         var displayName = globalState.contextMenuDisplayTarget
         var amILeader = amIPartyLeader()
-        var isSelf = playFabId == globalState.playFabId
+        var isSelf = playFabId === globalState.playFabId
         var isInFriends = _.includes(globalState.friendPlayFabIds, playFabId)
         var result = []
         var menuUUID = 0
@@ -3457,14 +3457,14 @@ var loadConfig = function () {
         for (var i = 1; i <= 10; i++) { // Pre-v11.0
         //for (var i = 1; i <= 14; i++) { // v11.00+
 
-            var selectable = globalState.mastermindVariantEnabled[i] == 0
-            var locked = globalState.mastermindVariantEnabled[i] == 1
-            var unavailable = globalState.mastermindVariantEnabled[i] == 2
-            var shuffling = globalState.mastermindVariantEnabled[i] == 3
-            var glowing = globalState.mastermindVariantEnabled[i] == 4
-            var disabledInRanked = globalState.mastermindVariantEnabled[i] == 5
-            var disabledGeneric = globalState.mastermindVariantEnabled[i] == 6
-            var selectableVariant = globalState.mastermindVariantEnabled[i] == 7
+            var selectable = globalState.mastermindVariantEnabled[i] === 0
+            var locked = globalState.mastermindVariantEnabled[i] === 1
+            var unavailable = globalState.mastermindVariantEnabled[i] === 2
+            var shuffling = globalState.mastermindVariantEnabled[i] === 3
+            var glowing = globalState.mastermindVariantEnabled[i] === 4
+            var disabledInRanked = globalState.mastermindVariantEnabled[i] === 5
+            var disabledGeneric = globalState.mastermindVariantEnabled[i] === 6
+            var selectableVariant = globalState.mastermindVariantEnabled[i] === 7
 
             //console.log('selectable: ' + selectable + ', locked: ' + locked + ', unavailable: ' + unavailable + ', globalState.mastermindVariantEnabled[i]: ' + globalState.mastermindVariantEnabled[i]
             //+ ', loading: ' + loading)

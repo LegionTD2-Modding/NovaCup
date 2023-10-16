@@ -1,7 +1,7 @@
 // Launcher
 // =============================================================================================
 
-var LauncherView = React.createClass({
+LauncherView = React.createClass({
     propTypes: {
         items: React.PropTypes.array
     },
@@ -55,13 +55,13 @@ var LauncherView = React.createClass({
     }
 })
 
-var LauncherMenu = React.createClass({
+LauncherMenu = React.createClass({
     propTypes: {
         name: React.PropTypes.string.isRequired,
         items: React.PropTypes.array.isRequired
     },
     render: function () {
-        var parent = this
+        parent = this
         return (
             React.createElement('div', { className: 'launcher-buttons' },
                 React.createElement('ul', {},
@@ -88,7 +88,7 @@ var LauncherMenu = React.createClass({
     }
 })
 
-var LauncherMenuButton = React.createClass({
+LauncherMenuButton = React.createClass({
     propTypes: {
         name: React.PropTypes.string.isRequired,
         displayName: React.PropTypes.string.isRequired,
@@ -105,7 +105,7 @@ var LauncherMenuButton = React.createClass({
         }
     },
     render: function () {
-        var parent = this
+        parent = this
         return (
             React.createElement(TextMenuButton, this.props)
         )
