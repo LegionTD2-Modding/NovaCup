@@ -105,7 +105,7 @@ li {
 }
 
 body {
-    font-family: 'MenuFont_English';
+    font-family: 'sans-serif', 'MenuFont_English';
     /*text-transform: uppercase;*/
     -moz-user-select: none;
     -webkit-user-select: none;
@@ -125,31 +125,31 @@ body {
 }
 
 body.English {
-    font-family: 'MenuFont';
+    font-family: 'sans-serif', 'MenuFont';
 }
 
 body.Korean {
-    font-family: 'MenuFont_Nanum';
+    font-family: 'sans-serif', 'MenuFont_Nanum';
 }
 
 body.Chinese_Simplified {
-    font-family: 'MenuFont_Nanum';
+    font-family: 'sans-serif', 'MenuFont_Nanum';
 }
 
 body.Chinese_Traditional {
-    font-family: 'MenuFont_Nanum';
+    font-family: 'sans-serif', 'MenuFont_Nanum';
 }
 
 body.Japanese {
-    font-family: 'MenuFont_Japanese';
+    font-family: 'sans-serif', 'MenuFont_Japanese';
 }
 
 body.Russian {
-    font-family: 'MenuFont_Russian';
+    font-family: 'sans-serif', 'MenuFont_Russian';
 }
 
 body.Persian {
-    font-family: 'MenuFont_Persian';
+    font-family: 'sans-serif', 'MenuFont_Persian';
 }
 
 input {
@@ -157,7 +157,7 @@ input {
     margin: auto;
     width: 256px;
     /* v3.15 */
-    font-family: 'MenuFont_chat' !important;
+    font-family: 'sans-serif', 'MenuFont_chat' !important;
     font-size: 13px;
 }
 
@@ -165,7 +165,7 @@ textarea {
     resize: vertical;
     margin-top: 12px;
     /* v3.15 */
-    font-family: 'MenuFont_chat' !important;
+    font-family: 'sans-serif', 'MenuFont_chat' !important;
     font-size: 13px;
 }
 
@@ -364,7 +364,7 @@ a {
 }
 
 .menu-backer-clouds {
-    background: url(../img/envbg.jpg);
+    /*background: url(../img/envbg.jpg);*/
     -webkit-animation: backgroundScrollLeft 120s linear infinite;
     animation: backgroundScrollLeft 120s linear infinite;
     background-size: auto 100%;
@@ -372,7 +372,7 @@ a {
 }
 
 .menu-backer-particles {
-    background: url(../img/rain.png);
+    /*background: url(../img/rain.png);*/
     -webkit-animation: backgroundScrollRight 40s linear infinite;
     animation: backgroundScrollRight 40s linear infinite;
     background-size: auto 100%;
@@ -1262,7 +1262,7 @@ a {
             .activity-monitor > .footer.footer-2.disabled {
                 bottom: -32px;
                 background: rgba(128, 128, 128, 0.75);
-                color: gray;
+                color: grey;
             }
 
 /* Icons */
@@ -1392,7 +1392,7 @@ img.icon {
         /*border: 4px solid #fff1ba !important;*/
         /* Commented out because of black ui screen bug */
         /*transform: scale(0.95);*/
-        transition: all none;
+        transition: all;
     }
 
     img.icon.selected {
@@ -2283,7 +2283,7 @@ tr.wave-info .simple-tooltip.flipped .tooltiptext::after {
 
 .codex .dropdown-container .label {
     text-align: center;
-    color: gray;
+    color: rgb(128, 128, 128);
     font-size: 13px;
 }
 
@@ -2382,7 +2382,7 @@ tr.wave-info .simple-tooltip.flipped .tooltiptext::after {
 
 li.modifier .icon {
     height: 32px;
-    border: 1px solid gray;
+    border: 1px solid rgb(128, 128, 128);
     margin: 3px;
 }
 
@@ -3128,7 +3128,7 @@ img.icon.legendary {
 }
 
 .rating-none {
-    color: gray;
+    color: rgb(128, 128, 128);
 }
 
 .loadingSticker .loadingBorder {
@@ -3575,7 +3575,7 @@ img.emote-image.no-animation {
     }
 
     50% {
-        transform: translate(0, 0) rotate(0eg);
+        transform: translate(0, 0) rotate(0deg);
     }
 
     75% {
@@ -3597,7 +3597,7 @@ img.emote-image.no-animation {
     }
 
     50% {
-        transform: translate(0, 0) rotate(0eg);
+        transform: translate(0, 0) rotate(0deg);
     }
 
     75% {
@@ -3619,7 +3619,7 @@ img.emote-image.no-animation {
     }
 
     50% {
-        transform: rotate(180eg);
+        transform: rotate(180deg);
     }
 
     75% {
@@ -3736,7 +3736,7 @@ img.emote-image.no-animation {
 }
 
 @keyframes slide-in-out {
-    0%: {
+    0% {
         transform: translateX(-50%) rotate(-10deg);
         opacity: 0;
     }
@@ -4000,7 +4000,7 @@ ul.bulleted-tooltip, ul.bulleted-tooltip li {
 }
 
 .button.big.restart-button-disabled {
-    background: gray;
+    background: rgb(128, 128, 128);
     font-size: 1rem;
     line-height: 2rem;
 }

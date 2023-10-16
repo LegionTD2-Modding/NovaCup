@@ -1,7 +1,7 @@
 // Reusable menu components
 // =============================================================================================
 
-var TabbedView = React.createClass({
+TabbedView = React.createClass({
     propTypes: {
         className: React.PropTypes.string,
         items: React.PropTypes.array,
@@ -44,7 +44,7 @@ var TabbedView = React.createClass({
     }
 })
 
-var TabbedMenu = React.createClass({
+TabbedMenu = React.createClass({
     propTypes: {
         name: React.PropTypes.string.isRequired,
         className: React.PropTypes.string,
@@ -64,7 +64,7 @@ var TabbedMenu = React.createClass({
         }
     },
     componentWillMount: function () {
-        var parent = this
+        parent = this
         bindings.selectSubmenu = function (menuId) {
             console.log('selectSubmenu ' + menuId)
             if (parent.selected != menuId) {
@@ -86,7 +86,7 @@ var TabbedMenu = React.createClass({
         engine.trigger('selectSubmenu', this.selected)
     },
     render: function () {
-        var parent = this
+        parent = this
         return (
             React.createElement('div', { className: 'overlay' },
                 React.createElement('div', { className: 'TabbedMenu' },
@@ -203,7 +203,7 @@ var TabbedMenu = React.createClass({
     }
 })
 
-var TabbedInlineMenu = React.createClass({
+TabbedInlineMenu = React.createClass({
     propTypes: {
         name: React.PropTypes.string.isRequired,
         className: React.PropTypes.string,
@@ -281,7 +281,7 @@ var TabbedInlineMenu = React.createClass({
     }
 })
 
-var TabbedInlineMenuButton = React.createClass({
+TabbedInlineMenuButton = React.createClass({
     propTypes: {
         menuId: React.PropTypes.number.isRequired,
         depth: React.PropTypes.number.isRequired,
@@ -334,7 +334,7 @@ var TabbedInlineMenuButton = React.createClass({
     }
 })
 
-var TabbedInlineMenuContent = React.createClass({
+TabbedInlineMenuContent = React.createClass({
     propTypes: {
         menuId: React.PropTypes.number.isRequired,
         name: React.PropTypes.string.isRequired,
@@ -395,7 +395,7 @@ var TabbedInlineMenuContent = React.createClass({
     }
 })
 
-var TabbedMenuButton = React.createClass({
+TabbedMenuButton = React.createClass({
     propTypes: {
         menuId: React.PropTypes.number.isRequired,
         depth: React.PropTypes.number.isRequired,
@@ -451,7 +451,7 @@ var TabbedMenuButton = React.createClass({
     }
 })
 
-var TabbedMenuContent = React.createClass({
+TabbedMenuContent = React.createClass({
     propTypes: {
         menuId: React.PropTypes.number.isRequired,
         name: React.PropTypes.string.isRequired,
@@ -558,7 +558,7 @@ var TabbedMenuContent = React.createClass({
 // =============================================================================================
 
 // SMELLY COPY AND PASTED CODE WITH LegionSelectView
-var BillboardView = React.createClass({
+BillboardView = React.createClass({
     propTypes: {
         items: React.PropTypes.array.isRequired,
         disableBackButton: React.PropTypes.bool,
@@ -583,7 +583,7 @@ var BillboardView = React.createClass({
     }
 })
 
-var BillboardMenu = React.createClass({
+BillboardMenu = React.createClass({
     propTypes: {
         items: React.PropTypes.array,
         disableBackButton: React.PropTypes.bool,

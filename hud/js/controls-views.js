@@ -11,10 +11,10 @@ var Module = React.createClass({
         moduleId: React.PropTypes.string.isRequired,
         height: React.PropTypes.number,
         width: React.PropTypes.number.isRequired,
-        defaultTop: React.PropTypes.string.isRequired,
+/*        defaultTop: React.PropTypes.string.isRequired,
         defaultRight: React.PropTypes.string.isRequired,
         defaultBottom: React.PropTypes.string.isRequired,
-        defaultLeft: React.PropTypes.string,
+        defaultLeft: React.PropTypes.string,*/
         defaultTop4k: React.PropTypes.string,
         defaultRight4k: React.PropTypes.string,
         defaultBottom4k: React.PropTypes.string,
@@ -197,8 +197,8 @@ var Module = React.createClass({
         }
 
         // Sanity checks
-        if (this.props.defaultLeft == 'unset') console.warn('WARNING: unset property is not supported by Coherent when resetting module position defaultLeft')
-        if (this.props.defaultTop == 'unset') console.warn('WARNING: unset property is not supported by Coherent when resetting module position defaultTop')
+        //if (this.props.defaultLeft == 'unset') console.warn('WARNING: unset property is not supported by Coherent when resetting module position defaultLeft')
+        //if (this.props.defaultTop == 'unset') console.warn('WARNING: unset property is not supported by Coherent when resetting module position defaultTop')
         // should we be checking if defaultBottom and defaultRight are unset or...?
         // or maybe it's okay as long as either defaultLeft or defaultRight is set? (same for top/bottom)? not sure
     },
