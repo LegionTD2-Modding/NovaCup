@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <link rel="stylesheet" type="text/css" href="lib/rangeslider/rangeslider.css" />
+    <link rel="stylesheet" type="text/css" href="lib/flag-icon/flag-icon.css" />
+
+    <title>Legion TD 2 Mercenary Icons</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <!-- Load override libraries (libraries which override core JS functionality -->
+    <script type="text/javascript" src="lib/bluebird/bluebird.core.min.js"></script>
+
+    <!-- Load regular libraries -->
+    <script type="text/javascript" src="lib/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.js"></script>
+    <!--<script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>-->
+    <script type="text/javascript" src="lib/react/react-dom.js"></script>
+    <!--<script type="text/javascript" src="lib/react/react-dom.min.js"></script>-->
+
+    <!-- Render after everything is loaded -->
+    <script type="text/javascript">
+        var MercenaryIconsApp = React.createClass({
+            getInitialState: function () {
+                return {
+                    icons: ['splashes/AquaSpirit.png', 'splashes/Brute.png'],
+                    mythium: 120
+                }
+            },
+            componentWillMount: function () {
+                var parent = this
+
+                engine.on('updateMercenaryIcons', function (icons, mythium) {
+                    parent.setState({ icons: icons, mythium: mythium })
+                })
+            },
+            render: function ()
+            {
+                return React.createElement('div', { id: 'MercenaryCaveIcons' }, 
+                    this.state.mythium > 0 && React.createElement('div', { className: 'mythium-text' },
+                        React.createElement('img', { src: 'hud/img/icons/Mythium.png' }),
+                        ' ',
+                        React.createElement('span', { }, this.state.mythium)
+                    ),
+                    this.state.icons.map(function (icon, index) {
+                        return React.createElement('img', {
+                            key: index, src: 'hud/img/' + icon
+                        })
+                    })
+                )
+            }
+        })
+
+        var app = React.createElement('div', {},
+            React.createElement(MercenaryIconsApp, {})
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+    </script>
+</body>
+</html>

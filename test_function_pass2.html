@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <title>Function test with react</title>
+</head>
+<body>
+    <div id="main">Crashing in 3 seconds...</div>
+
+    <script type="text/javascript" src="lib/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    <script type="text/javascript" src="lib/sorttable/sorttable.js"></script>
+
+    <script>
+        function createYesCancelMenu(behaviorIfYes, behaviorIfCancel) {
+            var menuUUID = 0
+            var menu = [
+                { key: menuUUID++, menuId: menuUUID, name: "Cancel", behavior: behaviorIfCancel },
+                { key: menuUUID++, menuId: menuUUID, buttonStyle: 1, name: "Yes", behavior: behaviorIfYes },
+            ]
+            return menu
+        }
+
+        function loadPopupExplicit(header, description, behavior, items, hasInput, hasParagraphInput, onSubmit, silent) {
+        }
+
+        engine.on('loadPopupExplicit', function (header, description, behavior, items, hasInput, hasParagraphInput, onSubmit, silent) {
+            loadPopupExplicit(header, description, behavior, items, hasInput, hasParagraphInput, onSubmit, silent)
+        })
+
+        engine.on('loadPopupYesCancel', function (header, description, behaviorIfYes, behaviorIfCancel) {
+            engine.trigger('loadPopupExplicit', header, description, null, createYesCancelMenu(behaviorIfYes, behaviorIfCancel), false, false, null)
+        })
+
+        engine.on('receivePartyInvite', function (playFabId, displayName) {
+            console.log('receive party invite')
+            engine.trigger('loadPopupYesCancel', "Join " + displayName + "'s party?", "",
+                function () {
+                    console.log('accept party invite')
+                }, function () {
+                    console.log('reject party invite')
+                }
+            )
+        })
+
+        // This causes a crash after 3 seconds
+        setTimeout(function() {
+            engine.trigger('receivePartyInvite', 'name', 'playFabId')
+        }, 3000)
+
+    </script>
+
+</body>
+</html>

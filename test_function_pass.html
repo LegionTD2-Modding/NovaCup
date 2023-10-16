@@ -1,0 +1,139 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <title>Function passing test with react</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    <script type="text/javascript" src="lib/chart/Chart.js"></script>
+    <script type="text/javascript" src="hud/js/bindings.js"></script>
+    <script type="text/javascript" src="localization/strings.js"></script>
+
+    <script type="text/javascript" src="hud/js/masthead-views.js"></script>
+    <script type="text/javascript" src="hud/js/chat-views.js"></script>
+    <script type="text/javascript" src="hud/js/controls-views.js"></script>
+    <script type="text/javascript" src="hud/js/targetframe-views.js"></script>
+    <script type="text/javascript" src="hud/js/matchmodifiers-views.js"></script>
+    <script type="text/javascript" src="hud/js/minimap-views.js"></script>
+    <script type="text/javascript" src="hud/js/menu-views.js"></script>
+    <script type="text/javascript" src="hud/js/scoreboard-views.js"></script>
+    <script type="text/javascript" src="hud/js/feed-views.js"></script>
+    <script type="text/javascript" src="hud/js/leaderboard-views.js"></script>
+    <script type="text/javascript" src="hud/js/profile-views.js"></script>
+    <script type="text/javascript" src="hud/js/postgame-views.js"></script>
+    <script type="text/javascript" src="hud/js/store-views.js"></script>
+    <script type="text/javascript" src="hud/js/credits.js"></script>
+    <script type="text/javascript" src="hud/js/reroll-views.js"></script>
+    <script type="text/javascript" src="hud/js/guide-views.js"></script>
+
+    <script type="text/javascript" src="hud/js/config.js"></script>
+
+    <script>
+        //var MenuButton = React.createClass({
+        //    propTypes: {
+        //        behavior: React.PropTypes.func,
+        //    },
+        //    render: function () {
+        //        var parent = this
+        //        return (
+        //            React.createElement('div', {
+        //                style: {
+        //                    border: '1px solid green',
+        //                    width: '64px',
+        //                    lineHeight: '24px',
+        //                },
+        //                onMouseDown: function (e) {
+        //                    if (parent.props.behavior) {
+        //                        console.log("calling menubutton behavior")
+        //                        parent.props.behavior()
+        //                    }
+        //                }
+        //            },
+        //                'Click me'
+        //            )
+        //        )
+        //    }
+        //})
+
+        //var StandardMenuButton = React.createClass({
+        //    propTypes: {
+        //        behavior: React.PropTypes.func,
+        //    },
+        //    render: function () {
+        //        return (
+        //            React.createElement(MenuButton, {
+        //                behavior: this.props.behavior,
+        //            })
+        //        )
+        //    }
+        //})
+
+        //engine.on('loadPopupYesCancel', function (buttonText, behaviorIfYes, behaviorIfCancel) {
+        //    // do stuff
+        //    //behaviorIfYes()
+        //    //behaviorIfCancel()
+
+        //    engine.trigger('doSomethingElse', behaviorIfYes, behaviorIfCancel)
+        //})
+
+        var app = React.createElement('div', {
+            style: {
+                height: '100vh',
+                width: '100vw',
+                background: 'black',
+                color: 'green',
+                padding: '24px',
+            }
+        },
+            React.createElement(TabbedMenu, {
+                name: "root", depth: 1, items: [], enableApplyButton: true,
+                active: true, customButton: null, standaloneTabs: false
+            })
+            //React.createElement(StandardMenuButton, {
+            //    behavior: function () {
+            //        engine.trigger('something', function () { })
+            //    }
+            //})
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+
+        //engine.trigger('loadPopupYesCancel',
+        //    'testButtonName',
+        //    function () {
+        //        console.log('yes behaviors')
+        //        engine.trigger('yes')
+        //        engine.call("yes")
+        //    },
+        //    function () {
+        //        console.log('cancel behaviors')
+        //        engine.trigger('no')
+        //        engine.call("no")
+        //    }
+        //)
+
+        //setTimeout(function () {
+        //    console.log('crash pls')
+        //    engine.trigger("loadPopupYesCancel", "Go back without saving?", "",
+        //        // This crashes - apparently in Coherent 1.15 we can't pass functions
+        //        // anymore (?)
+        //        //function () {
+        //        //    engine.trigger('escape')
+        //        //    engine.call("CancelOptions")
+        //        //},
+        //        cancelOptions, // still crashes.... omg
+        //        null)
+        //}, 2000)
+
+    </script>
+
+</body>
+</html>

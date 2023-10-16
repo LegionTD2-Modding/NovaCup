@@ -1,0 +1,131 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Glow test with react</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+
+    <style>
+        
+.card-art-container {
+    margin: auto;
+    position: relative;
+    display: block;
+    width: 400px;
+    height: 700px;
+    line-height: normal;
+    text-align: center;
+}
+
+    .card-art-container .front-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400px;
+    }
+
+    .card-art-container .splash-image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+    }
+
+    .card-art-container .front-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 400px;
+    }
+
+    .card-art-container .back {
+        position: absolute;
+        top: 64px;
+        left: -128px;
+        width: 400px;
+        transform: rotate(-10deg);
+    }
+
+    .card-art-container .front-name {
+        position: absolute;
+        top: 336px;
+        width: 340px;
+        color: #ccc;
+        left: 30px;
+        font-size: 2rem;
+        text-shadow: 0 0 5px #000;
+    }
+
+    .card-art-container .front-description {
+        position: absolute;
+        top: 403px;
+        width: 340px;
+        color: #0a0a0a;
+        left: 30px;
+        font-size: 1.5rem;
+        text-shadow: 0 0 5px #000;
+    }
+
+    .card-art-container img {
+        /*border-radius: 20px;*/
+    }
+
+        .card-art-container img.legendary {
+            -webkit-animation: legendary 1.5s ease-in-out infinite alternate;
+            animation: legendary 1.5s ease-in-out infinite alternate;
+            transition: all 0.5s;
+        }
+
+/* fancy glows */
+
+@keyframes legendary {
+    from {
+        box-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 8px #ff8000, 0 0 12px #ff8000, 0 0 16px #ff8000, 0 0 20px #ff8000, 0 0 24px #ff8000;
+    }
+
+    to {
+        box-shadow: 0 0 2.5px #fff, 0 0 5px #fff, 0 0 4px #ff8000, 0 0 6px #ff8000, 0 0 8px #ff8000, 0 0 10px #ff8000, 0 0 12px #ff8000;
+    }
+}
+
+    </style>
+
+    <script>
+        var getCardArt = function (item) {
+            var splashImage = item.image.replace('Icons/', 'splashes/');
+            splashImage = splashImage.replace('icons/', 'splashes/');
+            var name = item.name.replace(' Card', '')
+            var description = item.description
+
+            return React.createElement('div', { className: 'card-art-container' },
+                React.createElement('img', { className: 'back', src: 'hud/img/cards/lava/back.png' }),
+                React.createElement('img', { className: 'front-bg', src: 'hud/img/cards/lava/front_bg.png' }),
+                React.createElement('img', { className: 'splash-image', src: 'hud/img/' + splashImage }),
+                React.createElement('img', { className: 'front-frame' + ' ' + item.rarity, src: 'hud/img/cards/lava/front_frame.png' }),
+                React.createElement('div', { className: 'front-name' }, name),
+                React.createElement('div', { className: 'front-description' }, description)
+            )
+        }
+
+        var item = { 
+            key: 0, id: 'granddaddy_card', name: 'Granddaddy Card', description: 'Dwells underground in hives covered in glowing, pink pustules.', image: 'icons/Granddaddy.png', value: 2500, rarity: 'legendary', stacks: 2, isNew: true 
+        }
+
+        var app = React.createElement('div', {},
+            getCardArt(item)
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Billboard test</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+
+    <style>
+    </style>
+
+    <script>
+        var BillboardView = React.createClass({
+            propTypes: {
+                items: React.PropTypes.array.isRequired,
+                disableBackButton: React.PropTypes.bool,
+                narrow: React.PropTypes.bool,
+            },
+            render: function () {
+                return (
+                    React.createElement('div', { id: 'BillboardView' },
+                        React.createElement('div', {
+                            className: 'fullscreen',
+                            onMouseDown: function (e) { // v1.50
+                                engine.trigger('enableChat', false)
+                            },
+                            style: {
+                                pointerEvents: 'all'
+                            }
+                        },
+                            React.createElement(BillboardMenu, this.props)
+                        )
+                    )
+                )
+            }
+        })
+
+        var BillboardMenu = React.createClass({
+            propTypes: {
+                items: React.PropTypes.array,
+                disableBackButton: React.PropTypes.bool,
+                narrow: React.PropTypes.bool,
+            },
+            render: function () {
+                var isWide = this.props.items.length <= 4
+                var parent = this
+                return (
+                    React.createElement('div', { className: 'centered-text overlay' },
+                        React.createElement('div', { className: 'centered-text-wrapper' },
+                            React.createElement('div', { className: 'billboards' + (isWide ? " wide" : "") },
+                                React.createElement('ul', { style: { width: this.props.narrow ? '64vw' : 'auto', margin: 'auto', } }, /* 64vw is for legion select screen mainly */
+                                    this.props.items && this.props.items.map(function (item) {
+                                        if (!item) return null // Codex patch, just prevents some dumb warnings
+
+                                        return React.createElement(BillboardMenuButton, {
+                                            key: item.menuId,
+                                            name: item.name,
+                                            displayName: (item.displayName != null) ? item.displayName : item.name,
+                                            description: item.description,
+                                            behavior: item.behavior,
+                                            disabled: item.disabled,
+                                            disabledTooltip: item.disabledTooltip,
+                                            image: item.image,
+                                            mouseoverImage: item.mouseoverImage,
+                                            inverted: item.inverted,
+                                            tooltip: item.tooltip,
+                                            tooltipTitle: item.tooltipTitle,
+                                            greenTooltip: item.greenTooltip,
+                                            greenTooltipTitle: item.greenTooltipTitle,
+                                            yellowTooltip: item.yellowTooltip,
+                                            yellowTooltipTitle: item.yellowTooltipTitle,
+                                            attachedIcons: item.attachedIcons,
+                                            descriptionClass: item.descriptionClass,
+                                            attachedLinkText: item.attachedLinkText,
+                                            attachedLinkAction: item.attachedLinkAction,
+                                        })
+                                    })
+                                ),
+                                React.createElement('div', { className: 'confirmation-buttons' },
+                                    !this.props.disableBackButton && React.createElement(StandardMenuButton, {
+                                        name: loc('back', 'Back'),
+                                        displayName: loc('back', 'Back'),
+                                        behavior: function () { engine.trigger('escape') }
+                                    })
+                                )
+                            )
+                        )
+                    )
+                )
+            }
+        })
+
+
+        var MenuButton = React.createClass({
+            propTypes: {
+                name: React.PropTypes.string.isRequired,
+                displayName: React.PropTypes.string.isRequired,
+                behavior: React.PropTypes.func,
+                className: React.PropTypes.string,
+                disabled: React.PropTypes.bool,
+                content: React.PropTypes.object,
+                smallText: React.PropTypes.object,
+                style: React.PropTypes.object,
+            },
+            getInitialState: function () {
+                return {
+                    active: false
+                }
+            },
+            render: function () {
+                var parent = this
+
+                var tooltipInnerLength = 0
+                if (this.props.tooltip)
+                    tooltipInnerLength = this.props.tooltip.replace(/<(?:.|\n)*?>/gm, '').length
+
+                return (
+                    React.createElement('div', { // used to be <li> but then it gets dom errors if we put this inside an li
+                        className: (this.props.tooltip ? 'simple-tooltip ' : '') + 'button ' + (this.props.className ? this.props.className : '') + ((this.state.active && !this.state.disabled) ? ' active' : ''),
+                        onMouseOver: function () {
+                            if (parent.props.disabled) return
+
+                            parent.setState({ active: true })
+                        },
+                        onMouseEnter: function () {
+                            if (_.includes(parent.props.className, 'billboard'))
+                                engine.call("OnMouseOverHeavy", parent.props.name.length) // just use length so we don't leak strings
+                            else
+                                engine.call("OnMouseOverMedium", parent.props.name.length) // just use length so we don't leak strings
+                        },
+                        onMouseOut: function () {
+                            if (parent.props.disabled) return
+                            parent.setState({ active: false })
+                        },
+                        onMouseDown: function (e) {
+                            if (parent.props.disabled) {
+                                console.log("Clicked menu item " + parent.props.name + ", but it is disabled")
+                                return
+                            }
+
+                            console.log("Clicked menu item " + parent.props.name + ', clickType: ' + e.nativeEvent.which)
+                            engine.call("OnClickMenuButton")
+
+                            if (e.nativeEvent.which == 3) { // right click
+                                console.log("right click " + parent.props.name)
+                                engine.call("OnRightClickMenuButton", parent.props.name)
+                                return
+                            }
+
+                            if (parent.props.behavior) {
+                                console.log("running menubutton " + parent.props.name + " behavior")
+                                parent.props.behavior()
+                            }
+                            else
+                                engine.trigger('loadView', parent.props.name)
+                        },
+                        style: this.props.style,
+                    },
+                        this.props.content ? this.props.content : React.createElement('span', { dangerouslySetInnerHTML: { __html: this.props.displayName } }),
+                        this.props.smallText && this.props.smallText,
+                        this.props.tooltip && React.createElement('span', {
+                            className: 'tooltiptext' + ((tooltipInnerLength > 50) ? ' wide' : ''),
+                            dangerouslySetInnerHTML: {
+                                __html: this.props.tooltip
+                            }
+                        })
+                    )
+                )
+            }
+        })
+
+
+        var loc = function (apexId, placeholder, customStringDynamicOverrides) {
+            return placeholder
+        }
+
+        var BillboardMenuButton = React.createClass({
+            propTypes: {
+                name: React.PropTypes.string.isRequired,
+                displayName: React.PropTypes.string.isRequired,
+                description: React.PropTypes.string,
+                behavior: React.PropTypes.func,
+                disabled: React.PropTypes.bool,
+                disabledTooltip: React.PropTypes.string,
+                image: React.PropTypes.string,
+                mouseoverImage: React.PropTypes.string,
+                inverted: React.PropTypes.bool,
+                tooltip: React.PropTypes.string,
+                tooltipTitle: React.PropTypes.string,
+                greenTooltip: React.PropTypes.string,
+                greenTooltipTitle: React.PropTypes.string,
+                yellowTooltip: React.PropTypes.string,
+                yellowTooltipTitle: React.PropTypes.string,
+                attachedIcons: React.PropTypes.array,
+                descriptionClass: React.PropTypes.string,
+                attachedLinkText: React.PropTypes.string,
+                attachedLinkAction: React.PropTypes.func,
+            },
+            getInitialState: function () {
+                return {
+                    hover: false,
+                }
+            },
+            render: function () {
+                var parent = this
+                var customStyle = {}
+
+                var inverted = this.props.inverted
+                if (inverted) {
+                    customStyle = {
+                        background: '#151515',
+                    }
+                }
+
+                // No-scale mode for Legion Select (v5.00)
+                var withImageSwap = false
+                if (this.props.mouseoverImage)
+                    withImageSwap = true
+
+                return (
+                    React.createElement('div', {
+                        className: 'billboard-border'
+                    },
+                        React.createElement(MenuButton, {
+                            name: this.props.name,
+                            displayName: this.props.displayName,
+                            behavior: (!this.props.disabled ? this.props.behavior : null),
+                            className: 'simple-tooltip billboard' + (this.props.disabled ? ' disabled' : '') + (withImageSwap ? ' with-image-swap' : ''),
+                            disabled: this.props.disabled,
+                            content: React.createElement('div', { className: 'card-face' },
+                                React.createElement('div', {
+                                    className: 'billboard',
+                                    onMouseOver: function () {
+                                        if (parent.props.disabled) return
+                                        if (!parent.props.mouseoverImage) return
+                                        parent.setState({ hover: true })
+                                    },
+                                    onMouseLeave: function () {
+                                        if (parent.props.disabled) return
+                                        if (!parent.props.mouseoverImage) return
+                                        parent.setState({ hover: false })
+                                    }
+                                },
+                                    //this.state.hover && this.props.mouseoverImage && React.createElement('img', {
+                                    !this.props.disabled && this.props.mouseoverImage && React.createElement('img', {
+                                        className: 'big fade-fast', src: 'hud/img/' + this.props.mouseoverImage, style: {
+                                            position: 'absolute', left: '0', zIndex: '2', pointerEvents: 'none',
+                                            opacity: parent.state.hover ? 100 : 0,
+                                        }
+                                    }),
+                                    this.props.image && React.createElement('img', {
+                                        className: 'big', src: 'hud/img/' + this.props.image, style: {}
+                                    }),
+                                    !this.props.disabled && this.props.mouseoverImage && React.createElement('img', {
+                                        className: 'big fade', src: 'hud/img/' + this.props.mouseoverImage, style: {
+                                            position: 'absolute', left: '0', zIndex: '1', outlineOffset: '10px',
+                                            opacity: parent.state.hover ? 100 : 0,
+                                        }
+                                    }),
+                                    this.props.attachedIcons && this.props.attachedIcons.length > 0 && React.createElement('div', { className: 'attached-icons' },
+                                        this.props.attachedIcons.map(function (icon) {
+                                            return React.createElement('img', { src: icon })
+                                        })
+                                    ),
+                                    //React.createElement('div', { className: 'centered-text', style: { width: '100%', height: '80px' } },
+                                    React.createElement('div', { className: 'centered-text' + (this.props.descriptionClass ? ' ' + this.props.descriptionClass : ' billboard-description') },
+                                        React.createElement('div', { className: 'centered-text-wrapper' },
+                                            React.createElement('div', {
+                                                className: 'name' + (inverted ? ' inverted' : ''),
+                                                dangerouslySetInnerHTML: {
+                                                    __html: this.props.displayName
+                                                }
+                                            }),
+                                            React.createElement('div', { className: 'description', dangerouslySetInnerHTML: { __html: this.props.description } })
+                                        )
+                                    ),
+                                    this.props.disabled && React.createElement('span', {
+                                        className: 'tooltiptext',
+                                        style: { width: 'calc(100% - 28px)', zIndex: '2', top: '0', bottom: 'auto' }
+                                    }, this.props.disabledTooltip),
+                                    this.props.greenTooltipTitle && React.createElement('div', {
+                                        className: 'simple-tooltip',
+                                        style: { background: 'rgba(46, 200, 70, 1)', width: '100%', float: 'left' },
+                                    },
+                                        React.createElement('span', { className: 'tooltiptext', style: { width: '230px', left: '-4px' } },
+                                            React.createElement('span', {
+                                                dangerouslySetInnerHTML: {
+                                                    __html: this.props.greenTooltip
+                                                }
+                                            })
+                                        ),
+                                        this.props.greenTooltipTitle
+                                    ),
+                                    this.props.yellowTooltipTitle && React.createElement('div', {
+                                        className: 'simple-tooltip',
+                                        style: { background: 'rgba(234, 181, 24, 1)', width: '100%', float: 'left', color: '#404040' },
+                                    },
+                                        React.createElement('span', { className: 'tooltiptext', style: { width: '230px', left: '-4px' } },
+                                            React.createElement('span', {
+                                                dangerouslySetInnerHTML: {
+                                                    __html: this.props.yellowTooltip
+                                                }
+                                            })
+                                        ),
+                                        this.props.yellowTooltipTitle
+                                    ),
+                                    this.props.tooltipTitle && React.createElement('div', {
+                                        className: 'simple-tooltip',
+                                        style: { background: 'rgba(57, 76, 85, 1)', width: '100%', float: 'left' },
+                                    },
+                                        React.createElement('span', { className: 'tooltiptext', style: { width: '230px', left: '-4px' } },
+                                            React.createElement('span', {
+                                                dangerouslySetInnerHTML: {
+                                                    __html: this.props.tooltip
+                                                }
+                                            })
+                                        ),
+                                        this.props.tooltipTitle
+                                    )
+                                )
+                            ),
+                            style: customStyle
+                        }),
+                        this.props.attachedLinkText && React.createElement('div', {
+                            className: 'billboard-attached-link',
+                            onMouseDown: function (e) {
+                                if (parent.props.attachedLinkAction)
+                                    parent.props.attachedLinkAction()
+                            }
+                        },
+                            this.props.attachedLinkText
+                        )
+                    )
+                )
+            }
+        })
+
+        var StandardMenuButton = React.createClass({
+            propTypes: {
+                name: React.PropTypes.string.isRequired,
+                displayName: React.PropTypes.string.isRequired,
+                locked: React.PropTypes.bool,
+                behavior: React.PropTypes.func,
+            },
+            render: function () {
+                var parent = this
+                return (
+                    React.createElement(MenuButton, {
+                        name: this.props.name,
+                        displayName: this.props.displayName,
+                        behavior: this.props.behavior,
+                        disabled: this.props.locked,
+                        className: 'big' + (this.props.locked ? ' disabled' : '')
+                    })
+                )
+            }
+        })
+
+        var items = [{ "key": 0, "menuId": 1, "name": "play", "displayName": "Multiplayer", "huge": true, "disabled": false, "smallText": { "key": null, "ref": null, "props": { "modifiers": [{ "key": 1, "header": "", "subheader": "You have recently AFK'ed or left a matchmade game early. Repeatedly AFKing or leaving games early will result in temporary account suspension. If you finish games, your account status will improve and this message will go away.", "image": "icons/Afk.png", "stacks": 5 }, { "key": 2, "header": "", "subheader": "+100% XP earned for this match", "image": "icons/XpBoost.png" }] }, "_owner": null } }, false, { "key": 1, "menuId": 2, "name": "training", "displayName": "Solo & Co-op", "huge": true, "disabled": false, "smallText": false }, false, { "key": 2, "menuId": 3, "name": "profile", "huge": false, "disabled": false, "displayName": "Profile", "smallText": { "type": "span", "key": null, "ref": null, "props": { "className": "smallText label", "children": "New!" }, "_owner": null } }, { "key": 3, "menuId": 4, "name": "leaderboards", "displayName": "Leaderboards", "huge": false, "disabled": false }, { "key": 4, "menuId": 5, "name": "store", "displayName": "Shop", "disabled": false, "huge": false, "tooltip": "" }, { "key": 5, "menuId": 6, "name": "guild", "displayName": "Guild", "disabled": false, "tooltip": "", "smallText": { "type": "span", "key": null, "ref": null, "props": { "children": { "type": "span", "key": null, "ref": null, "props": { "className": "smallText label", "children": "New Application!" }, "_owner": null } }, "_owner": null } }, { "key": 6, "menuId": 7, "name": "", "displayName": "", "huge": false, "smallText": { "type": "div", "key": null, "ref": null, "props": { "style": { "backgroundColor": "rgba(16, 23, 24, 0.5)", "border": "1px solid black", "marginBottom": "12px", "marginTop": "16px", "fontSize": "0" }, "children": [{ "type": "div", "key": null, "ref": null, "props": { "className": "patch-image", "style": { "backgroundImage": "url(\"hud/img/patch/patch.png\")", "height": "144px", "width": "256px", "display": "inline-block" } }, "_owner": null }, { "type": "div", "key": null, "ref": null, "props": { "className": "smallText", "style": { "float": "right", "width": "256px" }, "children": [{ "type": "span", "key": null, "ref": null, "props": { "className": "smallText em", "style": { "padding": "0 4px 0 0" }, "children": "New!" }, "_owner": null }, { "type": "span", "key": null, "ref": null, "props": { "style": {}, "children": ["v1.50", { "type": "img", "key": null, "ref": null, "props": { "src": "hud/img/small-icons/external-link.png", "style": { "marginLeft": "8px" } }, "_owner": null }] }, "_owner": null }, { "type": "div", "key": null, "ref": null, "props": { "style": { "fontSize": "0.75rem", "color": "rgb(160, 160, 160)" }, "children": "March 7, 2018" }, "_owner": null }, { "type": "div", "key": null, "ref": null, "props": { "className": "paragraphText", "style": { "display": "" }, "children": "" }, "_owner": null }, false] }, "_owner": null }] }, "_owner": null } }]
+
+        var app = React.createElement('div', {},
+            React.createElement(BillboardView, { items: items, disableBackButton: false, narrow: true })
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+
+    </script>
+
+</body>
+</html>

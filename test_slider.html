@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="lib/rangeslider/rangeslider.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <title>Slider test</title>
+</head>
+<body>
+    <div id="main">
+        <div class="" style="opacity: 1; transform: translateX(0px) translateY(0px);">
+            <div id="TabbedView">
+                <div class="fullscreen">
+                    <div class="overlay">
+                        <div class="TabbedMenu">
+                            <div class="tab-content narrow">
+                                <ul class="options-container">
+                                    <li style="">
+                                        <div class="value dropdown">
+                                            <div>
+                                                <input type="range"
+                                                       min="0"
+                                                       max="100"
+                                                       step="1"
+                                                       data-buffer="60" />
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/rangeslider/rangeslider.js"></script>
+
+    <script>
+        var slider = document.querySelectorAll('input[type="range"]')[0];
+        rangeSlider.create(slider, {
+            polyfill: true,     // Boolean, if true, custom markup will be created
+            rangeClass: 'rangeSlider',
+            disabledClass: 'rangeSlider--disabled',
+            fillClass: 'rangeSlider__fill',
+            bufferClass: 'rangeSlider__buffer',
+            handleClass: 'rangeSlider__handle',
+            startEvent: ['mousedown', 'touchstart', 'pointerdown'],
+            moveEvent: ['mousemove', 'touchmove', 'pointermove'],
+            endEvent: ['mouseup', 'touchend', 'pointerup'],
+            vertical: false,    // Boolean, if true slider will be displayed in vertical orientation
+            min: null,          // Number , 0
+            max: null,          // Number, 100
+            step: null,         // Number, 1
+            value: null,        // Number, center of slider
+            buffer: null,       // Number, in percent, 0 by default
+            stick: null,        // [Number stickTo, Number stickRadius] : use it if handle should stick to stickTo-th value in stickRadius
+            borderRadius: 10,    // Number, if you use buffer + border-radius in css for looks good,
+            onInit: function () {
+                console.info('onInit')
+            },
+            onSlideStart: function (position, value) {
+                console.info('onSlideStart', 'position: ' + position, 'value: ' + value);
+            },
+            onSlide: function (position, value) {
+                console.log('onSlide', 'position: ' + position, 'value: ' + value);
+            },
+            onSlideEnd: function (position, value) {
+                console.warn('onSlideEnd', 'position: ' + position, 'value: ' + value);
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <title>Ping test</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/wheelnav/raphael.min.js"></script>
+    <script type="text/javascript" src="lib/wheelnav/raphael.icons.min.js"></script>
+    <script type="text/javascript" src="lib/wheelnav/wheelnav.min.js"></script>
+
+    <style>
+        #piemenu > svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        #piemenu {
+            height: 400px;
+            width: 400px;
+            margin: auto;
+        }
+
+        @media (max-width: 400px) {
+            #piemenu {
+                height: 300px;
+                width: 300px;
+            }
+        }
+
+        [class|=wheelnav-piemenu-slice-basic] {
+            fill: #497F4C;
+            stroke: none;
+        }
+
+        [class|=wheelnav-piemenu-slice-selected] {
+            fill: #497F4C;
+            stroke: none;
+        }
+
+        [class|=wheelnav-piemenu-slice-hover] {
+            fill: #497F4C;
+            stroke: none;
+            fill-opacity: 0.77;
+            cursor: pointer;
+        }
+
+        [class|=wheelnav-piemenu-title-basic] {
+            fill: #333;
+            stroke: none;
+        }
+
+        [class|=wheelnav-piemenu-title-selected] {
+            fill: #fff;
+            stroke: none;
+        }
+
+        [class|=wheelnav-piemenu-title-hover] {
+            fill: #222;
+            stroke: none;
+            cursor: pointer;
+        }
+
+        [class|=wheelnav-piemenu-title] > tspan {
+            font-family: Impact, Charcoal, sans-serif;
+            font-size: 24px;
+        }
+    </style>
+
+    <div id='piemenu' data-wheelnav></div>
+
+
+    <script>
+        var piemenu = new wheelnav('piemenu');
+        piemenu.slicePathFunction = slicePath().DonutSlice;
+
+        // https://github.com/softwaretailoring/wheelnav/issues/31
+        // Icons: http://wtabs.softwaretailoring.net/icons.html
+        piemenu.slicePathCustom = slicePath().DonutSliceCustomization();
+        piemenu.slicePathCustom.minRadiusPercent = 0.15;
+        piemenu.slicePathCustom.maxRadiusPercent = 0.7;
+        piemenu.sliceSelectedPathCustom = piemenu.slicePathCustom;
+        piemenu.sliceInitPathCustom = piemenu.slicePathCustom;
+
+        // Spreader (ehh)
+        piemenu.spreaderInTitle = icon.cross;
+        piemenu.spreaderOutTitle = icon.cross;
+        piemenu.spreaderRadius = piemenu.wheelRadius * 0.34;
+        piemenu.spreaderEnable = true;
+        piemenu.spreaderRadius = 30;
+
+        // Props
+        piemenu.clockwise = false;
+        piemenu.wheelRadius = piemenu.wheelRadius * 0.83;
+        piemenu.clickModeRotate = false;
+
+        piemenu.createWheel([icon["contract"], icon["!"], icon["?"], icon["flag"]])
+        piemenu.navItems[0].navSlice.mouseup(function () { console.log('ping 0') })
+        piemenu.navItems[1].navSlice.mouseup(function () { console.log('ping 1') })
+        piemenu.navItems[2].navSlice.mouseup(function () { console.log('ping 2') })
+        piemenu.navItems[3].navSlice.mouseup(function () { console.log('ping 3') })
+    </script>
+
+</body>
+</html>

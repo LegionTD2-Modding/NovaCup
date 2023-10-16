@@ -1,0 +1,97 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <title>Ping test</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+
+    <style>
+        #ping {
+            width: 400px;
+            height: 400px;
+        }
+    </style>
+
+    <div id="ping">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="-2 -2 504 504" id="menu" style="transform-origin: 50% 50% 0px; transform: translate3d(0px, 0px, 0px) rotate(-45deg); touch-action: none; -moz-user-select: none;">
+            <style>
+                #menu {
+                    display: block;
+                    margin: 0 auto;
+                }
+
+                a {
+                    cursor: pointer;
+                    outline: none;
+                }
+
+                .item .sector {
+                    transition: all .1s linear;
+                    fill: rgba(72, 122, 118, 0.50);
+                    stroke: #111;
+                }
+
+                .item:hover .sector {
+                    fill: rgba(122, 188, 188, 0.75);
+                }
+
+                .menu-trigger {
+                    fill: rgba(72, 122, 118, 0.75);
+                    pointer-events: auto;
+                }
+
+                    .menu-trigger:hover, .menu-trigger:focus {
+                        fill: rgba(122, 188, 188, 0.75);
+                        cursor: pointer;
+                    }
+
+                symbol {
+                    overflow: visible;
+                }
+            </style>
+            <g id="symbolsContainer">
+                <symbol class="icon icon-" id="icon-1" viewBox="0 0 59 59">
+                    <!--Replace the contents of this symbol with the content of your icon-->
+                    <!--<rect fill="none" stroke="#111" stroke-width="1" width="100%" height="100%"></rect>
+                    <text fill="#222" x="50%" y="50%" dy=".3em" text-anchor="middle" font-size="1.2em">1</text>-->
+                    <path style="cursor: pointer;" fill="#ff0303" stroke="none" d="M29.225,23.567L25.447000000000003,17.025C24.308000000000003,15.052999999999999,22.445000000000004,11.825,21.306000000000004,9.852999999999998L17.528000000000006,3.310999999999998C16.388000000000005,1.337999999999998,14.525000000000006,1.337999999999998,13.386000000000006,3.310999999999998L9.609,9.853C8.47,11.825,6.606,15.053999999999998,5.467,17.025L1.69,23.567C0.5509999999999999,25.541,1.4829999999999999,27.154,3.761,27.154H27.151999999999997C29.432,27.154,30.363,25.541,29.225,23.567ZM16.536,24.58H14.295000000000002V22.429H16.536V24.58ZM16.428,20.844H14.405000000000001L14.204,11.64H16.611L16.428,20.844Z" transform="scale(2)" stroke-width="0.5"><title>warning</title></path>
+                </symbol>
+                <symbol class="icon icon-" id="icon-2" viewBox="0 0 59 59">
+                    <!--Replace the contents of this symbol with the content of your icon-->
+                    <!--<rect fill="none" stroke="#111" stroke-width="1" width="100%" height="100%"></rect>
+                    <text fill="#222" x="50%" y="50%" dy=".3em" text-anchor="middle" font-size="1.2em">2</text>-->
+                    <path style="cursor: pointer;" fill="#ffcc00" stroke="none" d="M16,1.466C7.973,1.466,1.466,7.973,1.466,16c0,8.027,6.507,14.534,14.534,14.534c8.027,0,14.534-6.507,14.534-14.534C30.534,7.973,24.027,1.466,16,1.466z M17.328,24.371h-2.707v-2.596h2.707V24.371zM17.328,19.003v0.858h-2.707v-1.057c0-3.19,3.63-3.696,3.63-5.963c0-1.034-0.924-1.826-2.134-1.826c-1.254,0-2.354,0.924-2.354,0.924l-1.541-1.915c0,0,1.519-1.584,4.137-1.584c2.487,0,4.796,1.54,4.796,4.136C21.156,16.208,17.328,16.627,17.328,19.003z" transform="scale(2)" stroke-width="0.5"><title>warning</title></path>
+                </symbol>
+                <symbol class="icon icon-" id="icon-3" viewBox="0 0 59 59">
+                    <!--Replace the contents of this symbol with the content of your icon-->
+                    <!--<rect fill="none" stroke="#111" stroke-width="1" width="100%" height="100%"></rect>
+                    <text fill="#222" x="50%" y="50%" dy=".3em" text-anchor="middle" font-size="1.2em">3</text>-->
+                    <path style="cursor: pointer;" fill="#33bbbb" stroke="none" d="M9.5,3v10c8,0,8,4,16,4V7C17.5,7,17.5,3,9.5,3z M6.5,29h2V3h-2V29z" transform="scale(2)" stroke-width="0.5"><title>warning</title></path>
+                </symbol>
+                <symbol class="icon icon-" id="icon-4" viewBox="0 0 59 59">
+                    <!--Replace the contents of this symbol with the content of your icon-->
+                    <!--<rect fill="none" stroke="#111" stroke-width="1" width="100%" height="100%"></rect>
+                    <text fill="#222" x="50%" y="50%" dy=".3em" text-anchor="middle" font-size="1.2em">4</text>-->
+                    <path style="cursor: pointer;" fill="#33ff33" stroke="none" d="M25.083,18.895l-8.428-2.259l2.258,8.428l1.838-1.837l7.053,7.053l2.476-2.476l-7.053-7.053L25.083,18.895zM5.542,11.731l8.428,2.258l-2.258-8.428L9.874,7.398L3.196,0.72L0.72,3.196l6.678,6.678L5.542,11.731zM7.589,20.935l-6.87,6.869l2.476,2.476l6.869-6.869l1.858,1.857l2.258-8.428l-8.428,2.258L7.589,20.935zM23.412,10.064l6.867-6.87l-2.476-2.476l-6.868,6.869l-1.856-1.856l-2.258,8.428l8.428-2.259L23.412,10.064z" transform="scale(2)" stroke-width="0.5"><title>warning</title></path>
+                </symbol>
+            </g>
+            <g id="itemsContainer">
+                <a class="item" id="item-1" role="link" tabindex="0" onmouseup="console.log('hey 1'); engine.trigger('onClickPingChooser', 1)" xlink:title=" " transform="matrix(1,0,0,1,0,0)" data-svg-origin="250 250"><path fill="none" stroke="#111" d="M330,250 l170,0 A250,250 0 0,0 250.00000000000003,0 l-2.842170943040401e-14,170 A80,80 0 0,1 330,250" class="sector"></path><use xlink:href="#icon-1" width="59" height="59" x="342.12237548828125" y="98.87762451171875" transform="rotate(45 371.62237548828125 128.37762451171875)"></use></a>
+                <a class="item" id="item-2" role="link" tabindex="0" onmouseup="console.log('hey 2'); engine.trigger('onClickPingChooser', 2)" xlink:title=" " transform="matrix(0,-1,1,0,0,500)" data-svg-origin="250 250"><path fill="none" stroke="#111" d="M330,250 l170,0 A250,250 0 0,0 250.00000000000003,0 l-2.842170943040401e-14,170 A80,80 0 0,1 330,250" class="sector"></path><use xlink:href="#icon-2" width="59" height="59" x="342.12237548828125" y="98.87762451171875" transform="rotate(135 371.62237548828125 128.37762451171875)"></use></a>
+                <a class="item" id="item-3" role="link" tabindex="0" onmouseup="console.log('hey 3'); engine.trigger('onClickPingChooser', 3)" xlink:title=" " transform="matrix(-1,0,0,-1,500,500)" data-svg-origin="250 250"><path fill="none" stroke="#111" d="M330,250 l170,0 A250,250 0 0,0 250.00000000000003,0 l-2.842170943040401e-14,170 A80,80 0 0,1 330,250" class="sector"></path><use xlink:href="#icon-3" width="59" height="59" x="342.12237548828125" y="98.87762451171875" transform="rotate(225 371.62237548828125 128.37762451171875)"></use></a>
+                <a class="item" id="item-4" role="link" tabindex="0" onmouseup="console.log('hey 4'); engine.trigger('onClickPingChooser', 4)" xlink:title=" " transform="matrix(0,1,-1,0,500.00000000000006,0)" data-svg-origin="250 250"><path fill="none" stroke="#111" d="M330,250 l170,0 A250,250 0 0,0 250.00000000000003,0 l-2.842170943040401e-14,170 A80,80 0 0,1 330,250" class="sector"></path><use xlink:href="#icon-4" width="59" height="59" x="342.12237548828125" y="98.87762451171875" transform="rotate(315 371.62237548828125 128.37762451171875)"></use></a>
+            </g>
+            <g id="trigger" class="trigger menu-trigger" role="button" onclick="console.log('hey 0'); engine.trigger('onClickPingChooser', 0)">
+                <circle cx="250" cy="250" r="70">
+                </circle>
+                <text fill="#222" x="50%" y="50%" dy=".3em" text-anchor="middle" font-size="96px" font-weight="bold">+</text>
+            </g>
+        </svg>
+    </div>
+</body>
+</html>

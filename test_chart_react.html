@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <title>Chart test with react</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/chart/Chart.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    <script type="text/javascript" src="hud/js/options.js"></script>
+    <script type="text/javascript" src="hud/js/widgets.js"></script>
+
+    <script>
+
+        var PostGameGraphs = React.createClass({
+            componentDidMount: function () {
+                this.createChart()
+            },
+            componentDidUpdate: function () {
+                this.createChart()
+            },
+            createChart: function () {
+                var chart = this.refs.chart
+                if (chart == null || chart.length == 0) return
+
+                var myChart = new Chart(chart, {
+                    type: 'line',
+                    data: {
+                        labels: ["Wave 1", "Wave 2", "Wave3", "Wave 4", "Wave 5", "Wave 6", "Wave 7", "Wave 8", "Wave 9"],
+                        datasets: [{
+                            label: 'Team Value Advantage',
+                            data: [200, 0, -100, -150, 100, 400, 0, -300, -400],
+                            backgroundColor: [
+                               'rgba(255, 99, 132, 1)'
+                            ],
+                            fill: 'origin'
+                        }]
+                    }
+                });
+            },
+            render: function () {
+                return (
+                    React.createElement('div', { id: 'PostGameGraphs' },
+                        React.createElement('canvas', {
+                            id: 'postgame-graph',
+                            ref: 'chart',
+                        })
+                    )
+                )
+            }
+        })
+
+        var app = React.createElement('div', {},
+            React.createElement(PostGameGraphs)
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+
+    </script>
+
+</body>
+</html>

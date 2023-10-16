@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Live view redraw test</title>
+
+
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+
+    <script type="text/javascript" src="lib/bluebird/bluebird.core.min.js"></script>
+    <script type="text/javascript" src="lib/lodash/lodash.min.js"></script>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.js"></script>
+
+    <script type="text/javascript" src="hud/js/global-state.js"></script>
+    <script type="text/javascript" src="hud/js/bindings.js"></script>
+    <script type="text/javascript" src="hud/js/codex-views.js"></script>
+    <script type="text/javascript" src="hud/js/widgets.js"></script>
+    <script type="text/javascript" src="hud/js/localization.js"></script>
+    <script type="text/javascript" src="hud/js/functions.js"></script>
+
+    <script type="text/javascript" src="hud/js/menu-views.js"></script>
+    <script type="text/javascript" src="hud/js/button-views.js"></script>
+</head>
+<body>
+    <div id="main"></div>
+
+    <style>
+        body {
+            background: black;
+            line-height: normal;
+            color: white;
+        }
+    </style>
+
+    <script>
+        menuUUID = 0
+        var codexMenu = [
+            { key: menuUUID++, menuId: menuUUID, name: "Fighters", displayName: loc('units', 'Units'), content: React.createElement(CodexUnits, {}), narrow: false },
+            { key: menuUUID++, menuId: menuUUID, name: "King", displayName: loc('king', 'King'), content: React.createElement(CodexKing, {}), narrow: true },
+            { key: menuUUID++, menuId: menuUUID, name: "Legion Spells", displayName: loc('legion_spells', 'Legion Spells'), content: React.createElement(CodexSpells, {}), narrow: true },
+            { key: menuUUID++, menuId: menuUUID, name: "Emojis", displayName: loc('emojis', 'Emojis'), content: React.createElement(CodexEmojis, {}), narrow: true },
+            { key: menuUUID++, menuId: menuUUID, name: "Text Commands", displayName: loc('debug_commands', 'Debug Commands (Sandbox)'), content: React.createElement(CodexDebugCommands, {}), narrow: true },
+            { key: menuUUID++, menuId: menuUUID, name: "Help", displayName: loc('help', 'Help'), content: React.createElement(CodexHelp, {}), narrow: true },
+        ]
+
+        var testCodexContent = {
+            legions: [
+                { key: 0, legionType: 'mastermind_legion_id', name: 'Mastermind', image: 'icons/Mastermind.png' },
+                { key: 1, legionType: 'atlantean_legion_id', name: 'Atlantean', image: 'icons/Atlantean.png' },
+                { key: 2, legionType: 'element_legion_id', name: 'Element', image: 'icons/Element.png' },
+                { key: 3, legionType: 'forsaken_legion_id', name: 'Forsaken', image: 'icons/Forsaken.png' },
+                { key: 4, legionType: 'grove_legion_id', name: 'Grove', image: 'icons/Grove.png' },
+                { key: 5, legionType: 'mech_legion_id', name: 'Mech', image: 'icons/Mech.png' },
+                { key: 6, legionType: 'nomad_legion_id', name: 'Nomad', image: 'icons/Nomad.png' },
+            ],
+            units: [
+                { key: 0, legionType: 'atlantean_legion_id', name: 'Pollywog', image: 'icons/Pollywog.png' },
+                { key: 1, legionType: 'atlantean_legion_id', name: 'Devilfish', image: 'icons/Devilfish.png' },
+                { key: 2, legionType: 'atlantean_legion_id', name: 'Seraphin', image: 'icons/Seraphin.png' },
+                { key: 3, legionType: 'atlantean_legion_id', name: 'Angler', image: 'icons/Angler.png' },
+                { key: 4, legionType: 'atlantean_legion_id', name: 'Bounty Hunter', image: 'icons/BountyHunter.png' },
+                { key: 5, legionType: 'atlantean_legion_id', name: 'Kingpin', image: 'icons/Kingpin.png' },
+                { key: 6, legionType: 'atlantean_legion_id', name: 'Sea Serpent', image: 'icons/SeaSerpent.png' },
+                { key: 7, legionType: 'atlantean_legion_id', name: 'Deepcoiler', image: 'icons/Deepcoiler.png' },
+                { key: 8, legionType: 'atlantean_legion_id', name: 'Grarl', image: 'icons/Grarl.png' },
+                { key: 9, legionType: 'atlantean_legion_id', name: 'Ocean Templar', image: 'icons/OceanTemplar.png' },
+                { key: 10, legionType: 'atlantean_legion_id', name: 'King Claw', image: 'icons/KingClaw.png' },
+                { key: 11, legionType: 'atlantean_legion_id', name: 'Priestess Of The Abyss', image: 'icons/PriestessOfTheAbyss.png' },
+                { key: 12, legionType: 'atlantean_legion_id', name: 'Azeria', image: 'icons/Azeria.png' },
+                { key: 13, legionType: 'atlantean_legion_id', name: 'Eggsack', image: 'icons/Eggsack.png' },
+                { key: 14, legionType: 'atlantean_legion_id', name: 'Hydra', image: 'icons/Hydra.png' },
+                { key: 15, legionType: 'element_legion_id', name: 'Proton', image: 'icons/Proton.png' },
+                { key: 16, legionType: 'element_legion_id', name: 'Atom', image: 'icons/Atom.png' },
+                { key: 17, legionType: 'element_legion_id', name: 'Aqua Spirit', image: 'icons/AquaSpirit.png' },
+                { key: 18, legionType: 'element_legion_id', name: 'Rogue Wave', image: 'icons/RogueWave.png' },
+                { key: 19, legionType: 'element_legion_id', name: 'Fire Elemental', image: 'icons/FireElemental.png' },
+                { key: 20, legionType: 'element_legion_id', name: 'Windhawk', image: 'icons/Windhawk.png' },
+                { key: 21, legionType: 'element_legion_id', name: 'Violet', image: 'icons/Violet.png' },
+                { key: 22, legionType: 'element_legion_id', name: 'Mudman', image: 'icons/Mudman.png' },
+                { key: 23, legionType: 'element_legion_id', name: 'Golem', image: 'icons/Golem.png' },
+                { key: 24, legionType: 'element_legion_id', name: 'Disciple', image: 'icons/Disciple.png' },
+                { key: 25, legionType: 'element_legion_id', name: 'Starcaller', image: 'icons/Starcaller.png' },
+                { key: 26, legionType: 'element_legion_id', name: 'Fire Lord', image: 'icons/FireLord.png' },
+                { key: 27, legionType: 'element_legion_id', name: 'Fenix', image: 'icons/Fenix.png' },
+            ]
+        }
+        engine.trigger('refreshCodexContent', testCodexContent)
+
+        var testCodexSelectedUnitData = {
+            unitType: 'Azeria', // just for testing, otherwise it will be azeria_unit_id
+            name: 'Azeria',
+            image: 'icons/Azeria.png',
+            description: 'In addition to its burst attack, it also can boost its attack speed and heal itself.',
+            sketchfabUrl: 'https://sketchfab.com/models/4e08e05c790f42d986338d7e20ad72ee',
+            cost: 350,
+            supply: 1,
+            tier: 'T5U',
+            color: '2c9a98',
+            waveNumber: 7,
+            legion: 'Atlantean',
+            legionType: 'atlantean_legion_id',
+            prefix: 'Atlantean T5U',
+            suffix: '(Enraged)',
+            hp: 3500,
+            dps: 61,
+            damage: 33,
+            attackType: 'Magic',
+            armorType: 'Arcane',
+            mana: 10,
+            manaRegen: 1,
+            attackSpeed: 1.03,
+            mspd: 270,
+            range: 500,
+            totalValue: 550,
+            bounty: 25,
+            upgradesTo: [{
+                key: 'bone_crusher_unit_id',
+                unitType: 'bone_crusher_unit_id',
+                image: 'icons/BoneCrusher.png',
+                name: 'Bone Crusher'
+            },
+            {
+                key: 'dark_mage_unit_id',
+                unitType: 'dark_mage_unit_id',
+                image: 'icons/DarkMage.png',
+                name: 'Dark Mage'
+            },
+            {
+                key: 'fire_archer_unit_id',
+                unitType: 'fire_archer_unit_id',
+                image: 'icons/FireArcher.png',
+                name: 'Fire Archer'
+            }],
+            upgradesFrom: [{
+                key: 'priestess_of_the_abyss_unit_id',
+                unitType: 'priestess_of_the_abyss_unit_id',
+                image: 'icons/PriestessOfTheAbyss.png',
+                name: 'Priestess Of The Abyss'
+            }],
+            abilities: [
+                {
+                    key: 1, abilityType: 'echostrike_ability_id', abilityClass: 'hidden', name: 'Echostrike', image: 'icons/Echostrike.png', description: 'Each attack launches 2 extra missiles, each dealing 100% base damage plus bonus damage equal to 0.04% target max health.',
+                    extendedDescription: 'Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>Some Field: Some Value<br/>'
+                }
+            ],
+            attackSpeedDescriptor: 'Fast',
+            movementType: 'Ground',
+            spawnBias: 0.5,
+            spawnDelay: 0,
+            offensePower: 250,
+            effectiveDps: 61,
+            effectiveThreat: 7,
+            movementSize: 0.5,
+            backswing: 0.5,
+            projectileSpeed: 1600,
+            mastermindGroups: 'pierce, natural',
+            flags: 'ground, organic',
+            turnRate: 0.25,
+            stockMax: 2,
+            stockTime: 30,
+        }
+        engine.trigger('refreshCodexSelectedUnit', testCodexSelectedUnitData)
+
+        var isUnityHost = false
+        var isBrowserTest = true
+
+        var liveView = React.createClass({
+            getInitialState: function () {
+                return {
+                    count: 0
+                }
+            },
+            render: function () {
+                var parent = this
+
+                var hideLiveView = parent.state.count % 2 == 0
+
+                console.log('render')
+                return (
+                    React.createElement('div', {},
+                        React.createElement('div', {}, parent.state.count),
+                        React.createElement('div', {
+                            style: { height: '200px', width: '200px', position: 'absolute', zIndex: '100', background: hideLiveView ? 'blue' : 'green' },
+                            onMouseDown: function (e) {
+                                console.log('click')
+                                parent.setState({ count: parent.state.count + 1 })
+                            }
+                        }),
+                        // This works fine (no bug)
+                        //!hideLiveView && React.createElement(CodexUnits)
+
+                        // This reproduces the bug (WEIRD!!!?)
+                        !hideLiveView && React.createElement('div', {},
+                            React.createElement(CodexUnits)
+                        )
+
+                        // This reproduces the bug
+                        //React.createElement('div', { style: { display: hideLiveView ? 'none' : ''}},
+                        //    React.createElement(TabbedView, {
+                        //        active: true, items: codexMenu, enableApplyButton: false,
+                        //        customButton: null, standaloneTabs: true,
+                        //    })
+                        //)
+
+                        // This also reproduces the bug
+                        //!hideLiveView && React.createElement(TabbedView, {
+                        //    active: true, items: codexMenu, enableApplyButton: false,
+                        //    customButton: null, standaloneTabs: true,
+                        //})
+
+                        // This also reproduces the bug
+                        //!hideLiveView && React.createElement(TabbedMenu, {
+                        //    name: "root", depth: 1, items: codexMenu, enableApplyButton: false,
+                        //    active: true, customButton: null, standaloneTabs: true
+                        //})
+                    )
+                )
+            }
+        })
+
+        var app = React.createElement(liveView)
+
+        ReactDOM.render(app, document.getElementById('main'))
+    </script>
+</body>
+</html>

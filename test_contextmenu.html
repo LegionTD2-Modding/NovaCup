@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <title>Context menu test</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+
+    <script>
+        // <This works in Unity>
+        //var menuUUID = 0
+        //var rightClickFriendsMenu = [
+        //    { key: menuUUID++, menuId: menuUUID, name: "Whisper", disabled: true, behavior: function () { console.log("hello") } },
+        //    { key: menuUUID++, menuId: menuUUID, name: "View Profile", disabled: true, behavior: function () { console.log("hello") } },
+        //    { key: menuUUID++, menuId: menuUUID, name: "Add to Favorites", disabled: true, behavior: function (target) { console.log("hello") } },
+        //    { key: menuUUID++, menuId: menuUUID, name: "Remove Friend", disabled: true, behavior: function (target) { console.log("hello") } },
+        //]
+        // </This works in Unity>
+
+        // <This crashes in Unity>
+        var menuUUID = 0
+        var rightClickFriendsMenu = [
+            { key: menuUUID++, menuId: menuUUID, name: "Whisper", disabled: true, behavior: function (target) { console.log("hello") } },
+            { key: menuUUID++, menuId: menuUUID, name: "View Profile", disabled: true, behavior: function (target) { console.log("hello") } },
+            { key: menuUUID++, menuId: menuUUID, name: "Add to Favorites", disabled: true, behavior: function (target) { console.log("hello") } },
+            { key: menuUUID++, menuId: menuUUID, name: "Remove Friend", disabled: true, behavior: function (target) { console.log("hello") } },
+        ]
+        // </This crashes in Unity>
+
+        engine.on('refreshContextMenuActions', function (actions) {
+            console.log("called with " + actions.length + " actions")
+        })
+
+        engine.trigger('refreshContextMenuActions', rightClickFriendsMenu)
+    </script>
+
+</body>
+</html>

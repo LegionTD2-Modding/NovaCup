@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <link rel="stylesheet" type="text/css" href="lib/rangeslider/rangeslider.css" />
+    <link rel="stylesheet" type="text/css" href="lib/flag-icon/flag-icon.css" />
+
+    <title>Legion TD 2 Mercenary Icons</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <!-- Load override libraries (libraries which override core JS functionality -->
+    <script type="text/javascript" src="lib/bluebird/bluebird.core.min.js"></script>
+
+    <!-- Load regular libraries -->
+    <script type="text/javascript" src="lib/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.js"></script>
+    <!--<script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>-->
+    <script type="text/javascript" src="lib/react/react-dom.js"></script>
+    <!--<script type="text/javascript" src="lib/react/react-dom.min.js"></script>-->
+
+    <!-- Render after everything is loaded -->
+    <script type="text/javascript">
+        var EmotePingApp = React.createClass({
+            getInitialState: function () {
+                return {
+                    image: 'emotes/fine.png',
+                    name: 'Lisk',
+                    animationType: 'slide-in-out',
+                    glowColor: 'ff0303'
+                }
+            },
+            componentWillMount: function () {
+                var parent = this
+
+                console.log('EmotePing initialized')
+
+                engine.on('updateEmotePingImage', function (image, animationType) {
+                    console.log('updateEmotePingImage: ' + image + ', animationType: ' + animationType)
+
+                    parent.setState({ image: image, animationType: animationType })
+
+                    var hide = parent.state.image.length == 0
+                    if (!hide) {
+                        parent.refs['emote'].style.animation = 'none'
+                        parent.refs['emote'].offsetHeight;
+                        parent.refs['emote'].style.animation = null
+                        parent.refs['emoteContainer'].style.animation = 'none'
+                        parent.refs['emoteContainer'].offsetHeight;
+                        parent.refs['emoteContainer'].style.animation = null
+
+                        parent.forceUpdate()
+                    }
+                })
+
+                engine.on('updateEmotePingName', function (name, glowColor) {
+                    console.log('updateEmotePingName: ' + name)
+                    parent.setState({ name: name, glowColor: glowColor })
+                })
+            },
+            render: function ()
+            {
+                var parent = this
+
+                console.log('parent.state.image: ' + parent.state.image)
+                //console.log('parent.state.image.length: ' + parent.state.image.length)
+                var hide = parent.state.image.length == 0
+                //console.log('hide: ' + hide)
+
+                if (hide) return null
+
+                return React.createElement('div', {
+                    id: 'EmotePing', className: 'centered-text'
+                }, 
+                    React.createElement('div', { className: 'centered-text-wrapper' },
+                        this.state.name != '' && React.createElement('div', 
+                            { 
+                                className: 'name',
+                                style: {
+                                    //textShadow: '0px 0px 36px #' + parent.state.glowColor + ', 0px 0px 36px #' + parent.state.glowColor
+                                    textShadow: '0px 0px 12px #404040' + ', 0px 0px 20px #404040'
+                                }
+                            },
+                            React.createElement('span', {
+                                dangerouslySetInnerHTML: {
+                                    __html: this.state.name
+                                }
+                            })
+                        ),
+                        React.createElement('div', {
+                            className: 'emote-image-container',
+                            ref: 'emoteContainer'
+                        },
+                            React.createElement('img', { className: 'emote-image ' + parent.state.animationType, ref: 'emote', src: 'hud/img/' + parent.state.image })
+                        )
+                    )
+                )
+            }
+        })
+
+        var app = React.createElement('div', {},
+            React.createElement(EmotePingApp, {})
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+    </script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <title>Chart test with react</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/chart/Chart.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    <script type="text/javascript" src="hud/js/options.js"></script>
+    <script type="text/javascript" src="hud/js/widgets.js"></script>
+
+    <script>
+
+        var TestChart = React.createClass({
+            componentDidMount: function () {
+                this.createChart()
+            },
+            componentDidUpdate: function () {
+                this.createChart()
+            },
+            createChart: function () {
+                var chart = this.refs.chart
+                if (chart == null || chart.length == 0) return
+
+                var myChart = new Chart(chart, {
+                    type: 'radar',
+                    data: {
+                        labels: ['Economist', 'Breaker', 'Tactician', 'Guardian', 'Architect', 'Kingsguard'],
+                        datasets: [{
+                            data: [500, 100, 150, 200, 150, 100],
+                            backgroundColor: '#375965',
+                            //borderColor: 'white'
+                        }],
+                    },
+                    options: {
+                        legend: {
+                            display: false,
+                            labels: {
+                                fontColor: 'red'
+                            }
+                        },
+                        scale: {
+                            ticks: {
+                                beginAtZero: true,
+                                maxTicksLimit: 4,
+                                display: false,
+                            },
+                            angleLines: {
+                                display: false,
+                            },
+                            gridLines: {
+                                color: [ 'rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.1)', 'rgba(255, 255, 255, 0.8)' ],
+                            },
+                            pointLabels: {
+                                fontColor: 'red',
+                            }
+                        }
+                    }
+                });
+            },
+            render: function () {
+                return (
+                    React.createElement('div', {},
+                        React.createElement('canvas', {
+                            ref: 'chart',
+                        })
+                    )
+                )
+            }
+        })
+
+        var app = React.createElement('div', {
+            style: {
+                background: 'black'
+            }},
+            React.createElement(TestChart)
+        )
+
+        ReactDOM.render(app, document.getElementById('main'))
+
+    </script>
+
+</body>
+</html>

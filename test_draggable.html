@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <title>Draggable test</title>
+</head>
+<body>
+    <div id="main"></div>
+    <style>
+        body {
+            background-color: gray;
+        }
+        .testbox {
+            background-color: red;
+            height: 100px;
+            width: 100px;
+        }
+    </style>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.js"></script>
+
+    <script type="text/javascript">
+        // Request animationFrame https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+        })();
+
+        var util = {
+            onMouseLeaveWindow: function (callback) {
+                return function (e) {
+                    if (e.relatedTarget == null)
+                        callback()
+                }
+            }
+        }
+    </script>
+
+    <script type="text/javascript">
+        var MainApp = React.createClass({
+            render: function () {
+                return (
+                    React.createElement('div', { className: 'MainApp' },
+                        React.createElement(DraggableWindow)
+                    )
+                )
+            }
+        })
+
+        var draggableWindow_needForRAF
+        var DraggableWindow = React.createClass({
+            getInitialState: function () {
+                return {
+                    customStyle: {},
+                    offsetX: 0,
+                    offsetY: 0
+                }
+            },
+            componentWillMount: function () {
+                var parent = this
+                engine.on('enableDrag', function () {
+                    draggableWindow_needForRAF = true
+                    window.addEventListener('mousemove', parent.drag);
+                    window.addEventListener('mouseup', parent.endDrag);
+                    window.addEventListener('mouseout', util.onMouseLeaveWindow(parent.endDrag))
+                })
+                engine.on('setPosition', function (left, top) {
+                    left = Math.max(Math.min(left, window.innerWidth - 100), 0)
+                    top = Math.max(Math.min(top, window.innerHeight - 100), 0)
+                    parent.setState({
+                        customStyle: {
+                            position: 'fixed',
+                            left: left + 'px',
+                            top: top + 'px',
+                            right: 'unset',
+                            bottom: 'unset'
+                        }
+                    })
+                })
+            },
+            endDrag: function () {
+                console.log("end dragg")
+                window.removeEventListener('mousemove', this.drag);
+                window.removeEventListener('mouseup', this.endDrag);
+                window.removeEventListener('mouseout', util.onMouseLeaveWindow(parent.endDrag))
+            },
+            drag: function (e) {
+                var parent = this
+                //console.log("drag to " + e.pageX + ", " + e.pageY)
+                if (draggableWindow_needForRAF) {
+                    draggableWindow_needForRAF = false
+                    requestAnimationFrame(function () {
+                        draggableWindow_needForRAF = true
+                        engine.trigger('setPosition', e.pageX - parent.state.offsetX, e.pageY - parent.state.offsetY)
+                    })
+                }
+            },
+            render: function () {
+                var parent = this
+                return (
+                    React.createElement('div', {
+                        className: 'testbox',
+                        style: parent.state.customStyle,
+                        onMouseDown: function (e) {
+                            var clickType = e.nativeEvent.which
+                            console.log("clicktype: " + clickType)
+                            if (clickType == 3) {
+                                parent.setState({ offsetX: e.nativeEvent.offsetX, offsetY: e.nativeEvent.offsetY })
+                                engine.trigger('enableDrag')
+                            }
+                        },
+                        onContextMenu: function (e) {
+                            e.preventDefault()
+                        },
+                        draggable: true
+                    })
+                )
+            }
+        })
+
+        ReactDOM.render(React.createElement(MainApp, {}), document.getElementById('main'))
+
+        window.addEventListener('contextmenu', function (e) { // Not compatible with IE < 9
+            e.preventDefault();
+        }, false)
+
+    </script>
+
+    <!-- Load test data after everything is rendered - comment this out in production -->
+
+</body>
+</html>

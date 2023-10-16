@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Live view redraw test</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <style>
+        body {
+            background: white
+        }
+    </style>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.js"></script>
+
+    <script>
+        var liveView = React.createClass({
+            getInitialState: function () {
+                return {
+                    count: 0,
+                    hideLiveView: false,
+                }
+            },
+            render: function () {
+                var parent = this
+
+                console.log('render')
+                return (
+                    React.createElement('div', {},
+                        React.createElement('div', {}, parent.state.count),
+                        React.createElement('div', {
+                            style: { height: '200px', width: '200px', background: 'green' },
+                            onMouseDown: function (e) {
+                                parent.setState({ hideLiveView: !parent.state.hideLiveView })
+                            }
+                        }),
+                        React.createElement('div', { style: { display: parent.state.hideLiveView ? 'none' : '' } },
+                            React.createElement('div', {
+                                style: { height: '200px', width: '200px', background: 'rgb(0, 0, ' + (parent.state.count * 10) + ')' },
+                                onMouseDown: function (e) {
+                                    parent.setState({ count: parent.state.count + 1 })
+                                }
+                            }),
+                            React.createElement('img', {
+                                src: 'liveview://codexLiveView',
+                                style: {
+                                    height: '500px',
+                                    width: '500px',
+                                    background: 'red',
+                                    position: 'absolute',
+                                    top: '0',
+                                    right: '0',
+                                },
+                                onMouseDown: function (e) {
+                                    console.log("codexLiveView mousedown")
+                                },
+                            })
+                        )
+                    )
+                )
+            }
+        })
+
+        var app = React.createElement(liveView)
+
+        ReactDOM.render(app, document.getElementById('main'))
+    </script>
+</body>
+</html>

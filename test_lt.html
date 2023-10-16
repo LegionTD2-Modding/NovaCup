@@ -1,0 +1,32 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>Glow test with react</title>
+</head>
+<body>
+    <div id="main"></div>
+
+    <style>
+        body {
+            background: white
+        }
+    </style>
+
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    
+    <script>
+        var message = "<span>Lisk: </span> &lt; &gt; &amp;"
+
+        var app = React.createElement('div', {
+            dangerouslySetInnerHTML: { __html: message }
+        })
+
+        ReactDOM.render(app, document.getElementById('main'))
+
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1608 @@
+/* Shared */
+@media screen and (width: 3840px) and (height: 2160px) {
+    body {
+        font-size: 24px;
+    }
+
+    input {
+        width: 400px;
+        font-size: 24px;
+    }
+
+    img.tooltip-icon {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+/* Tooltips */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .simple-tooltip .tooltiptext {
+        bottom: 110%;
+        font-size: 24px;
+        padding: 16px;
+    }
+
+        .simple-tooltip .tooltiptext.wide {
+            width: 400px;
+        }
+}
+
+/* Bottom Bar */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #BottomBarIconContainer .stream-count {
+        bottom: 9px;
+        padding: 3px;
+        font-size: 1.5rem;
+        left: -4px;
+    }
+
+    #BottomBarIconContainer img.client-menu-button {
+        width: 32px;
+        height: 32px;
+    }
+
+    #BottomBar, #BottomBarLoading {
+        height: 58px;
+    }
+
+    #ChatViewContainer {
+        font-size: 24px;
+        width: 1800px;
+        right: 450px;
+    }
+
+        #ChatViewContainer .consoleInput {
+            padding: 0.2rem;
+            font-size: 24px;
+            width: 1780px;
+            margin-bottom: 6px;
+        }
+
+        #ChatViewContainer #ChatViewLabel {
+            font-size: 24px;
+            bottom: 28px;
+            left: -510px;
+        }
+
+    #InGameChat.inGameChatWindow .chatOptIn {
+        width: 1440px;
+    }
+
+    #PlayerCountContainer {
+        font-size: 24px;
+        bottom: 28px;
+    }
+
+    #InGameChat.inGameChatWindow .inGameChatOutput {
+        height: 525px;
+        width: 1437px;
+    }
+
+        #InGameChat.inGameChatWindow .inGameChatOutput.tall {
+            height: 425px;
+            margin-top: 125px;
+        }
+
+    #InGameChat.inGameChatWindow .inGameChatSubscribers {
+        height: 522px;
+        width: 320px;
+    }
+
+        #InGameChat.inGameChatWindow .inGameChatSubscribers .memberGroupTitle {
+            font-size: 20px;
+        }
+
+        #InGameChat.inGameChatWindow .inGameChatSubscribers .subscriber-line img.chat-avatar {
+            width: 24px;
+            height: 24px;
+        }
+
+    .subscriber-line .avatar-border-with-3-stacks::after, .subscriber-line .avatar-border-with-10-stacks::after {
+        top: 0px;
+        left: -26px;
+        width: 12px;
+        height: 12px;
+    }
+
+    #ClientWatermarkApp .text-watermark {
+        font-size: 24px;
+    }
+
+    #SubAnnouncement {
+        font-size: 20px;
+        line-height: 20px;
+    }
+
+        #SubAnnouncement .tooltip-icon {
+            height: 20px;
+            width: 20px;
+        }
+
+    #Announcement {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+        #Announcement .content {
+            margin-top: -2px;
+        }
+
+    #PingChooser {
+        transform: scale(1.5);
+    }
+
+    #ResourcesWindow li.simple-tooltip {
+        transform: scale(0.57);
+        font-size: 28px;
+        width: 100px;
+        margin-left: -10px; /* Looks a bit different ingame */
+    }
+
+        #ResourcesWindow li.simple-tooltip .tooltiptext {
+            font-size: 24px !important;
+            width: 300px !important;
+        }
+
+        #ResourcesWindow li.simple-tooltip .tooltiptext.mythium {
+            bottom: 76px;
+        }
+
+        #ResourcesWindow li.simple-tooltip img.resource-icon {
+            height: 24px !important;
+            width: 24px !important;
+        }
+
+    #MinimapStats .simple-tooltip {
+        transform: scale(0.57);
+        font-size: 28px;
+        width: 162px;
+        margin-left: -38px !important;
+        line-height: 14px;
+    }
+
+    #MinimapStats .simple-tooltip.income {
+        margin-top: 0px !important;
+    }
+
+        #MinimapStats .simple-tooltip.workers {
+            margin-top: -12px !important;
+        }
+
+    #MinimapStats li.simple-tooltip .tooltiptext {
+        font-size: 24px !important;
+        width: 300px !important;
+    }
+
+    #MinimapStats li.simple-tooltip img.income-image {
+        height: 32px !important;
+        width: 32px !important;
+        top: 6px !important;
+    }
+
+    #MinimapStats li.simple-tooltip img.mythium-image {
+        height: 32px !important;
+        width: 32px !important;
+        top: 6px !important;
+    }
+
+    #MinimapStats li.simple-tooltip img.resource-icon {
+        height: 24px !important;
+        width: 24px !important;
+    }
+
+    .recommended-value-hitbox img.resource-icon {
+        /* annoying, should de-blur sometime */
+    }
+
+    .recommended-value-hitbox.simple-tooltip .recommended-value-current-value {
+        transform: scale(0.57);
+        font-size: 18px;
+    }
+
+    .recommended-value-hitbox.simple-tooltip .recommended-value-delta {
+        transform: scale(0.57);
+        font-size: 14px !important;
+    }
+
+    .recommended-value-hitbox.simple-tooltip .tooltiptext {
+        transform: scale(0.57);
+        font-size: 24px !important;
+        width: 500px !important;
+        margin-bottom: -52px !important;
+    }
+
+    #Console {
+        font-size: 20px;
+        width: 676px;
+    }
+
+    .inGameChatWindow .inGameChatOutput {
+        width: 680px;
+        height: 250px;
+    }
+
+        .inGameChatWindow .inGameChatOutput.unscrollable {
+            width: 680px;
+        }
+
+    .inGameChatWindow .consoleInput {
+        font-size: 20px;
+        height: 40px;
+    }
+
+    #Console.inGameChatWindow .inGameChatOutput .output-line {
+        width: 646px;
+        max-width: 646px;
+    }
+
+    .Module.menubuttons {
+        margin-top: -40px;
+    }
+
+    .Module.matchModifiers {
+        margin-top: 5px;
+    }
+}
+
+/* Context Menu */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #ContextMenu .header {
+        padding: 16px;
+    }
+}
+
+/* Tooltip */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .tooltiptext.small {
+        font-size: 20px !important;
+    }
+}
+
+/* Friends List */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #SidebarMenu {
+        width: 450px;
+    }
+
+        #SidebarMenu #SidebarProfile {
+            width: 450px;
+            height: 106px;
+        }
+
+        #SidebarMenu #SidebarFriends {
+            width: 450px;
+        }
+
+        #SidebarMenu #SidebarParty {
+            width: 450px;
+        }
+
+        #SidebarMenu #SidebarProfile .vitals .currency .currency-text {
+            max-width: 110px;
+        }
+
+        #SidebarMenu #SidebarProfile .vitals .currency .currency-text.tiny {
+            font-size: 1.5rem;
+        }
+
+        .progress-container .value {
+            font-size: 24px;
+        }
+
+    .guild-abbr {
+        font-size: 20px;
+    }
+
+    #SidebarMenu .tagline {
+        font-size: 24px;
+    }
+
+    #SidebarProfile .progress-container {
+        width: 256px !important;
+        height: 32px !important;
+    }
+
+    #SidebarMenu li.ratings-and-currencies img.rating-image {
+        height: 32px !important;
+        width: 32px !important;
+    }
+
+    #SidebarMenu #SidebarFriends {
+        top: 110px;
+        bottom: 685px;
+    }
+
+        #SidebarMenu #SidebarFriends #FriendsTools img, #SidebarMenu #SidebarParty #PartyTools img {
+            height: 36px;
+        }
+
+    #SidebarMenu #SidebarParty {
+        height: 675px;
+    }
+
+        #SidebarMenu #SidebarParty .party {
+            height: 550px;
+        }
+}
+
+/* Main Menu */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .patch-image {
+        width: 384px !important;
+        height: 216px !important;
+        background-size: cover;
+        background-repeat: no-repeat;
+    }
+
+    .patch-summary {
+        width: 512px !important;
+    }
+
+    .patch-date {
+        font-size: 24px !important;
+    }
+
+    .activity-monitor {
+        height: 160px !important;
+        left: 30px;
+        right: 30px;
+    }
+
+        .activity-monitor .spinner canvas {
+            width: 100px !important;
+            height: 100px !important;
+        }
+
+        .activity-monitor > .content {
+            left: 130px;
+        }
+
+            .activity-monitor > .content h2 {
+                font-size: 32px;
+            }
+
+        .activity-monitor > .footer {
+            padding: 12px 0;
+            bottom: 0px;
+        }
+
+            .activity-monitor > .footer.footer-2 {
+                bottom: -54px;
+            }
+
+    li.modifier .icon {
+        height: 64px !important;
+        width: 64px !important;
+    }
+
+    .Module li.modifier .icon {
+        height: 36px !important;
+        width: 36px !important;
+    }
+
+    #Notifications {
+        right: 430px;
+    }
+
+    .launcher-buttons .smallText {
+        font-size: 2rem;
+    }
+
+    .launcher-buttons .paragraphText {
+        font-size: 24px;
+    }
+}
+
+/* Billboards */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .billboards .button.billboard .billboard-description {
+        height: 280px;
+    }
+
+    .billboards .billboard .attached-icons img {
+        width: 64px;
+    }
+
+    .billboard-attached-link {
+        margin: 80px auto;
+        font-size: 28px;
+    }
+
+    .faq-container .content {
+        width: 1440px;
+    }
+}
+
+/* Custom games */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .directory ul li.browser-row {
+        padding: 36px;
+    }
+
+    #CustomGameMenu #CustomGameSlots .column {
+        max-width: 9999px !important;
+    }
+
+        #CustomGameMenu #CustomGameSlots .column .button {
+            width: calc(100% - 210px);
+        }
+
+    #CustomGameSlots .button-container .icon.button img {
+        width: 44px !important;
+        height: 44px !important;
+    }
+
+    #CustomGameMenu #CustomGameSlots .column .button {
+        line-height: 80px;
+    }
+
+    #CustomGameMenu #CustomGameSlots .column .player-name-container {
+        line-height: 32px;
+    }
+
+    #CustomGameMenu #CustomGameSlots .column .player-settings-summary {
+        font-size: 24px;
+    }
+
+        #CustomGameMenu #CustomGameSlots .column .player-settings-summary img {
+            width: 16px;
+            height: 16px;
+            margin-right: 6px;
+        }
+}
+
+/* Buttons */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .button {
+        padding: 1rem 4rem;
+    }
+
+        .button.big {
+            padding: 2rem 4rem;
+            font-size: 4rem;
+        }
+
+            .button.big.restart-button-disabled {
+                font-size: 2rem;
+                line-height: 4rem;
+            }
+
+        .button.icon {
+            width: 48px !important;
+            height: 48px !important;
+        }
+
+        .button img.icon {
+            width: 48px;
+            height: 48px;
+        }
+
+    .confirmation-buttons .button {
+        margin: 3rem 0.5rem;
+    }
+
+    .confirmation-buttons .show-my-stacks {
+        margin: 3rem 0.5rem !important;
+    }
+
+        .confirmation-buttons .show-my-stacks .checkbox-box img.checkbox-icon {
+            position: absolute;
+        }
+
+    .card-wizard-window .confirmation-buttons .fragments {
+        margin: 3rem 0.5rem;
+        padding: 16px 40px;
+    }
+
+    .card-wizard-window .confirmation-buttons .pity.progress-container {
+        margin: 3rem 0.5rem;
+        height: 62px !important;
+        width: 224px !important;
+    }
+
+    .card-wizard-window .confirmation-buttons .pity.progress-container .value {
+        line-height: 62px !important;
+    }
+
+        .card-wizard-window .confirmation-buttons .pity.progress-container .value img {
+            top: 20px !important;
+        }
+}
+
+/* Popups */
+@media screen and (width: 3840px) and (height: 2160px) {
+    h1 {
+        padding: 2rem 0;
+        font-size: 60px;
+    }
+
+    .popupDropdown.wide {
+        width: 1400px;
+    }
+
+    .popup .header {
+        padding: 3rem;
+    }
+
+    .popup .popupDropdown .items p {
+        padding: 6rem;
+    }
+
+    .popup .items.collection.scrollable {
+        transform: scale(1.25);
+    }
+
+    .skin-equip-window {
+        padding: 48px;
+    }
+
+        .skin-equip-window .card-art-container {
+            height: 750px;
+        }
+
+        .skin-equip-window .front-description-buttons {
+            width: 1400px !important;
+            left: -430px !important;
+        }
+
+    .items.monument-slots .simple-tooltip .tooltiptext {
+        font-size: 16px;
+    }
+
+    /* Weird */
+    .popup .victory, .popup .defeat {
+        font-size: 3vw;
+        line-height: 7vw;
+        margin-bottom: -2vw;
+    }
+
+    /* Weird */
+    .popup .tie {
+        font-size: 2rem !important;
+        /*line-height: 7vw;
+        margin-bottom: -2vw;*/
+    }
+}
+
+/* Tabs */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .TabbedMenu > .tab-content.narrow {
+        width: 2000px;
+        max-width: 2000px;
+    }
+
+    .TabbedMenu ul.tabs > li.tab {
+        padding: 3rem 5rem;
+        font-size: 24px;
+    }
+
+    .TabbedMenu > .tab-content.narrow.postgame {
+        width: 2000px;
+        max-width: 2000px;
+    }
+
+    .TabbedMenu > .tab-content:not(.narrow) {
+        top: 3vh;
+    }
+
+    .TabbedMenu .tabbed-menu-title {
+        font-size: 102px;
+        line-height: 134px;
+    }
+}
+
+/* Leaderboard */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #Leaderboard .leaderboard.main-leaderboard {
+        height: 60vh;
+    }
+
+    .leaderboard {
+        font-size: 28px;
+    }
+
+        .leaderboard td.name {
+            width: 1400px;
+        }
+
+            .leaderboard td.name.wide {
+                width: 1400px;
+            }
+
+    .top-games-intro {
+        font-size: 28px !important;
+    }
+
+    .top-games-top-spacer {
+        height: 160px !important;
+    }
+
+    .codex .units-list .options .unit-search, .leaderboards .unit-search {
+        padding: 1rem;
+        font-size: 24px;
+    }
+
+    .leaderboard td.level {
+        width: 285px;
+    }
+
+    .leaderboard td.country {
+        width: 195px;
+    }
+
+    .leaderboard td img {
+        width: 48px;
+        height: 48px;
+    }
+}
+
+
+/* Profile */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .profile-container {
+        padding: 50px;
+    }
+
+    .profile-container .profile-main .avatar img {
+        width: 300px;
+        height: 300px;
+    }
+
+    .profile-container .profile-main .identity .guild {
+        font-size: 24px;
+    }
+
+    .profile-container .favorite-units img.favorite-unit {
+        height: 64px;
+    }
+
+    .profile-container .profile-main .identity {
+        max-width: 1000px;
+    }
+
+    .dropdown-container.queue-type {
+        width: 320px !important;
+        top: 342px !important;
+        left: 562px !important;
+    }
+
+        .dropdown-container.queue-type .dropdown-item {
+            width: 194px;
+            padding: 1.5rem 0 1.0rem 126px;
+        }
+
+    .dropdown-container.season {
+        width: 320px !important;
+        top: 96px !important;
+    }
+
+        .dropdown-container.season .dropdown-item {
+            width: 194px;
+            padding: 1.5rem 0 1.0rem 126px;
+        }
+
+    .dropdown-container.stats-type {
+        width: 320px;
+        left: 75px;
+    }
+
+        .dropdown-container.stats-type .dropdown-item {
+            width: 194px;
+            padding: 1.5rem 28px 1.0rem 98px;
+        }
+
+    .game-stats-dropdown-containers .dropdown-container.queue-type {
+        top: -40px !important;
+        left: 766px !important;
+    }
+
+    .profile-container .profile-main .ranked {
+        width: 1000px;
+        margin-top: 90px;
+        line-height: 28px;
+    }
+
+    .profile-container .profile-main .label {
+        font-size: 24px;
+    }
+
+    .profile-container .profile-main .profile-search-container input.profile-search {
+        padding: 1rem;
+        font-size: 24px;
+        width: 400px;
+    }
+
+    .profile-main .search-x {
+        right: 62px !important;
+        top: 80px !important;
+    }
+
+        .profile-main .search-x img {
+            height: 20px;
+        }
+
+    .monuments-background {
+        height: 852px !important;
+    }
+
+    .monument-slots {
+        top: 288px;
+        transform: scale(1.7);
+    }
+
+    .profile-container .profile-main .name {
+        font-size: 4.5rem;
+    }
+
+    .profile-container .profile-main .win-loss {
+        font-size: 32px;
+    }
+
+    .match-history-container .match-history-row .vitals .gameresult .victory {
+        font-size: 32px;
+    }
+
+    .match-history-container .match-history-row .vitals .gameresult .defeat {
+        font-size: 32px;
+    }
+
+    .match-history-container .match-history-row .vitals .gameresult .elo-gain {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .vitals .gameresult .elo-loss {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .vitals .queue {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .vitals .game-length {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .vitals .game-date {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .build .build-container .label {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .build .build-container .label {
+        font-size: 20px;
+    }
+
+    .match-history-container .match-history-row .vitals {
+        width: 275px;
+    }
+
+    .match-history-container .match-history-row .build {
+        width: 550px;
+    }
+
+    .match-history-container .match-history-row .stats {
+        width: 300px;
+    }
+
+    .match-history-container .match-history-row .wave-icon img {
+        height: 96px;
+        width: 96px;
+    }
+
+    .match-history-container .match-history-row {
+        padding: 24px;
+    }
+
+        .match-history-container .match-history-row .stats img {
+            width: 28px;
+        }
+
+        .match-history-container .match-history-row .stats .stat {
+            font-size: 28px;
+        }
+
+        .match-history-container .match-history-row .build .spell img {
+            height: 48px;
+        }
+
+        .match-history-container .match-history-row .build .tower img {
+            height: 48px;
+        }
+
+        .match-history-container .match-history-row .build .build-container .label {
+            line-height: 48px;
+        }
+
+        .match-history-container .match-history-row .team {
+            font-size: 28px;
+            width: 250px;
+        }
+
+            .match-history-container .match-history-row .team .player img {
+                height: 24px;
+            }
+
+    .game-coach img.game-coach-icon {
+        height: 64px;
+    }
+
+    .game-coach .game-coach-text {
+        margin-top: 10px;
+        max-width: calc(100% - 96px);
+    }
+
+    .profile-container .profile-main .ranked .value.rank {
+        font-size: 20px;
+    }
+
+    .profile-container .profile-main .ranked .value.rank .rank-percentile {
+        font-size: 20px;
+    }
+}
+
+/* Postgame */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .postgame-container .postgame-main .gameresult .header {
+        font-size: 5rem;
+        line-height: 5rem;
+    }
+
+    .postgame-container .postgame-main .gameresult .subtitle {
+        font-size: 1.5rem;
+    }
+
+    .postgame-container .postgame-main .rewards .label {
+        font-size: 1.25rem;
+    }
+
+    .postgame-container .postgame-main .rewards .small-label {
+        font-size: 1.33rem;
+    }
+
+    .postgame-container .postgame-main .avatar img {
+        height: 128px;
+        width: 128px;
+    }
+
+    .postgame-container .postgame-main .rewards {
+        max-width: 250px;
+    }
+
+    .postgame-main .game-coach-container {
+        font-size: 24px;
+    }
+
+    .game-coach .game-coach-name {
+        font-size: 24px;
+    }
+
+    .game-coach {
+        width: 1060px;
+    }
+
+    .postgame-builds-container {
+        width: 2000px !important;
+        height: 96px !important;
+    }
+
+        .postgame-builds-container .progress-container {
+            width: 320px !important;
+            height: 32px !important;
+        }
+
+        .postgame-builds-container img.postgame-king {
+            height: 32px !important;
+            width: 32px !important;
+        }
+
+    /* unsure about this, for waves */
+    .dropdown-panel .dropdown-item {
+        padding: 1rem 4rem;
+    }
+
+    #PostGameBuilds .leaderboard.no-hover {
+        transform: scale(1.5);
+        margin-top: 200px;
+        font-size: 16px;
+    }
+
+    .postgame-arrow-hint {
+        margin-top: 212px !important;
+    }
+
+    .postgame-container {
+        padding: 40px;
+    }
+
+        .postgame-container .postgame-main .rewards .rating {
+            font-size: 28px;
+        }
+
+        .postgame-container .rewards .progress-container {
+            width: 200px !important;
+            height: 28px !important;
+            margin-bottom: -2px;
+        }
+
+        .postgame-container .postgame-main .rewards .xp {
+            margin-top: 3px !important;
+        }
+
+        .postgame-container .rewards .mastery-bar {
+            margin: 0 0 -8px 0 !important;
+        }
+
+        .postgame-container .rewards .mastery-bar .progress-container {
+            width: 160px !important;
+            height: 24px !important;
+        }
+
+        .postgame-container .rewards .mastery-bar .mastery-icon {
+            width: 36px !important;
+            height: 36px !important;
+        }
+
+        .postgame-container .rewards .mastery-bar .progress-container .value {
+            padding: 4px;
+            font-size: 20px;
+        }
+
+        .postgame-container .rewards .progress-container .value {
+            font-size: 24px;
+        }
+
+        .postgame-container .leaderboard {
+            font-size: 24px;
+        }
+
+    .postgame-spell {
+        width: 24px !important;
+        height: 24px !important;
+    }
+
+    .postgame-container .leaderboard .progress-container {
+        width: 120px !important;
+        height: 36px !important;
+    }
+}
+
+/* Shop */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .store-container .store-search {
+        padding: 1rem;
+    }
+
+    .store-container .store-item {
+        height: 256px;
+        width: 256px;
+    }
+
+        .store-container .store-item .name {
+            font-size: 24px;
+            width: 240px;
+            margin: -88px auto 0 auto;
+        }
+
+        .store-container .store-item .item-image {
+            height: 240px;
+            width: 240px;
+        }
+
+    .currency-icon {
+        width: 28px;
+    }
+
+    .store-container .store-item .price {
+        font-size: 24px;
+    }
+
+    .mini-shop-window .store-container .store-item .price {
+        margin-top: 36px;
+    }
+
+    .store-container .store-item .rarity {
+        bottom: 0px;
+        width: 32px;
+    }
+
+    .button.em.currency {
+        font-size: 4rem;
+        margin: 3rem 0.5rem;
+    }
+
+    .currency-balance {
+        font-size: 1.5rem;
+    }
+
+    .store-container .store-item .title {
+        font-size: 2rem;
+        margin: -240px auto 0 auto;
+    }
+
+    .store-container .store-item .price .price-subtext {
+        font-size: 1.33rem;
+    }
+
+    .card-wizard-window .confirmation-buttons .button.big {
+        margin: 3rem 0.5rem !important;
+    }
+
+    ul.tabs .currency img.currency-icon {
+        width: 24px;
+    }
+
+    .card-wizard-window .confirmation-buttons .button.em.currency {
+        margin: 1rem 0.5rem;
+    }
+}
+
+/* GuildOverview */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #GuildOverview .profile-main .donate.button {
+        font-size: 24px;
+        padding: 1rem 3rem;
+    }
+
+    #GuildOverview .progress-container {
+        width: 200px !important;
+        height: 60px !important;
+    }
+
+        #GuildOverview .progress-container .value {
+            line-height: 60px !important;
+        }
+
+            #GuildOverview .progress-container .value img {
+                top: 0px !important;
+                vertical-align: middle !important;
+            }
+
+    #GuildOverview .reward-icon {
+        height: 48px !important;
+        width: 48px !important;
+        margin: 0px 16px;
+    }
+
+    .guild-member-rating img {
+        width: 48px !important;
+        height: 48px !important;
+    }
+
+    #GuildOverview .guild-menu .dropdown-container {
+        width: 320px;
+    }
+
+        #GuildOverview .guild-menu .dropdown-container .dropdown-panel {
+            width: 320px;
+        }
+
+    .directory-content {
+        width: 1440px;
+    }
+
+    #GuildOverview .profile-main .identity .abbreviation {
+        font-size: 24px;
+    }
+
+    #GuildOverview .profile-main .identity .members {
+        font-size: 24px;
+    }
+}
+
+/* Options */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .TabbedMenu > .tab-content.enableApplyButton {
+        bottom: 254px;
+    }
+
+    .options-container li .description {
+        width: calc(100% - 464px);
+    }
+
+    .tab-content.narrow .options-container .dropdown-panel {
+        right: 31px;
+    }
+}
+
+/* Codex */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .codex .units-list .units .unit {
+        font-size: 32px;
+        padding: 2px 0;
+    }
+
+        .codex .units-list .units .unit .unit-prefix {
+            font-size: 24px;
+            width: 170px;
+        }
+
+    .codex .units-list {
+        width: 55%;
+    }
+
+    .codex .units-content {
+        width: 1800px;
+        max-width: 1800px;
+    }
+
+        .codex .units-content .unit-stats-container .stats-table .stat-container .label {
+            width: 240px;
+            color: #909090;
+        }
+
+        .codex .units-content .unit-stats-container .stats-table .stat-container.advanced .label {
+            width: 240px;
+            color: #909090;
+        }
+
+        .codex .units-content .label {
+            font-size: 24px;
+        }
+
+    .codex .abilities-table .stat-container td.label {
+        width: 240px !important;
+        color: #909090;
+    }
+
+    /* EXPERIMENTAL */
+    .codex .units-content .sketchfab-embed {
+        width: 920px;
+        height: 800px;
+    }
+
+    .codex:not(.credits-menu) {
+        bottom: 246px;
+    }
+}
+
+
+/* Twitch & Inbox */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #BottomBarIconContainer #TwitchPopout, #BottomBarIconContainer #InboxPopout {
+        width: 1024px;
+        max-height: 1024px;
+    }
+
+    #BottomBarIconContainer .twitch-name {
+        font-size: 24px;
+        bottom: -10px;
+    }
+
+    #BottomBarIconContainer .twitch-viewers {
+        font-size: 24px;
+    }
+
+    #BottomBarIconContainer .stream-container {
+        width: 294px;
+    }
+
+    #BottomBarIconContainer img.twitch-thumb {
+        width: 294px;
+    }
+
+    #BottomBarIconContainer .twitch-title {
+        margin-top: 22px;
+    }
+
+    #BottomBarIconContainer #TwitchHeader {
+        font-size: 36px;
+    }
+
+    #InboxHeader {
+        font-size: 36px;
+    }
+
+    .inboxmessage .inboxmessage-title {
+        font-size: 24px;
+    }
+
+        .inboxmessage .inboxmessage-title .inboxmessage-subtitle {
+            font-size: 24px;
+        }
+}
+
+/* Loading screen */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #LoadingView .loadingSticker {
+        transform: scale(1.66);
+        margin: 0 77px 120px 77px;
+    }
+
+    #LoadingView .anchor6 {
+        width: 1440px;
+    }
+
+    #LoadingView .loadingSticker .loadingStickerNameContainer .loadingStickerGuild {
+        font-size: 16px;
+    }
+
+    #LoadingView .loadingSticker .loadingStickerNameContainer .loadingStickerName {
+        font-size: 16px;
+    }
+}
+
+
+/* In Game */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #MainApp #TargetFrameWindow .progress-container .value {
+        font-size: 16px;
+    }
+
+        .guideWindow .leaderboard td {
+            font-size: 16px;
+        }
+
+            .guideWindow .leaderboard td.recommended-types {
+                font-size: 16px !important;
+            }
+
+            .guideWindow .leaderboard td img, .guideWindow .leaderboard td .icon-placeholder {
+                width: 18px;
+                height: 18px;
+            }
+
+    .guideWindow .attack-type {
+        font-size: 16px;
+        padding-top: 9px;
+    }
+
+    #TargetFrame .buffs li {
+        margin-bottom: 6px;
+    }
+
+    #TargetFrame > .panel > .vitals .name {
+        transform: scale(0.57);
+        font-size: 28px;
+        margin-left: -27px;
+        margin-top: -8px;
+        height: 30px;
+    }
+
+    #TargetFrame .centered-text > .centered-text-wrapper > ul > li {
+        transform: scale(0.57);
+        font-size: 28px;
+        width: 140px;
+        margin: -8px -30px -12px -30px;
+    }
+
+    #TargetFrame .centered-text > .centered-text-wrapper > ul > li img.resource-icon {
+        height: 28px !important;
+        width: 28px !important;
+    }
+
+    #MainApp .anchor2 {
+        top: 64px;
+    }
+
+    #StackrankApp {
+    }
+
+        #StackrankApp .player-row .score {
+            font-size: 16px;
+        }
+
+        #StackrankApp .player-row .content .name {
+            font-size: 16px;
+        }
+
+            #StackrankApp .player-row .content .name .guild-abbr {
+                font-size: 12px;
+            }
+
+    #MainApp .anchor4 .simple-tooltip .tooltiptext {
+        font-size: 16px;
+    }
+
+        #MainApp .anchor5 .simple-tooltip .tooltiptext {
+            font-size: 16px;
+        }
+
+    .in-game-coach-dialogue {
+        font-size: 16px;
+    }
+
+    #MainApp .anchor6 {
+        bottom: 54px;
+    }
+
+        #MainApp .anchor6 .simple-tooltip .tooltiptext {
+            font-size: 16px;
+        }
+
+        #MainApp .anchor6 .tooltip .header {
+            font-size: 16px;
+        }
+
+        #MainApp .anchor6 .tooltip .subheader {
+            font-size: 16px;
+        }
+
+        #MainApp .anchor6 .tooltip .recommendation {
+            font-size: 16px;
+        }
+
+        #MainApp .anchor6 .tooltip .text {
+            font-size: 16px;
+        }
+
+    #MercenariesWindow .autosend .autosend-text {
+        font-size: 20px;
+        padding: 6px;
+    }
+
+    #MiniScoreboardApp .player-row {
+        font-size: 20px;
+    }
+
+    /* dunno why it randomly is on the left side. just hide for now... */
+    #WatermarkApp {
+        display: none;
+    }
+
+    #MainApp .anchor7 .simple-tooltip .tooltiptext {
+        font-size: 16px;
+    }
+
+    #MainApp .anchor8 ul#feed {
+        font-size: 16px;
+    }
+
+    #feed .feedMessage .text-container img {
+        width: 16px;
+        height: 16px;
+    }
+
+    .scoreboard.billboards {
+        transform: scale(1.5);
+    }
+
+        .scoreboard.billboards .feedMessage {
+            font-size: 16px;
+        }
+
+        .scoreboard.billboards h1 {
+            font-size: 32px;
+        }
+
+        .scoreboard.billboards .button.normal {
+            font-size: 20px;
+        }
+
+    .Kings .progress-container .value {
+        font-size: 20px !important;
+    }
+
+    .ActionQueue {
+        font-size: 16px;
+    }
+
+    .ActionOverlay {
+        font-size: 16px;
+    }
+}
+
+/* Full screen misc */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .fullscreen-icon-selection-container {
+        transform: scale(1.5);
+    }
+
+    .fullscreen-icon-selection-container .simple-tooltip .tooltiptext {
+        font-size: 16px;
+    }
+
+    .button.accept-rolls {
+        font-size: 16px;
+    }
+
+    #RerollWindow .button {
+        padding: 0rem;
+        line-height: 32px;
+    }
+
+    #RerollWindow .simple-tooltip .tooltiptext.wide {
+        width: 200px;
+    }
+
+    #RerollWindow img.tooltip-icon {
+        height: 16px;
+        width: 16px;
+    }
+
+    #RerollWindow .hint {
+        font-size: 16px;
+    }
+
+    #ReadyButton .button {
+        padding: 0.5rem 0;
+        font-size: 16px;
+    }
+
+    #ReadyButton .message {
+        font-size: 16px;
+    }
+}
+
+/* Campaign */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #CampaignMap .TabbedMenu {
+        height: 128px !important;
+    }
+
+    img.campaign-star-icon {
+        height: 24px !important;
+    }
+
+    .campaign-menu-stars {
+        font-size: 2rem !important;
+    }
+
+    #CampaignMap .content-container {
+        transform: scale(1.5);
+    }
+
+    #CampaignMap .description {
+        font-size: 16px;
+    }
+
+    #CampaignMap .content-container .star .star-description {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    #CampaignMap .content-container .star {
+        font-size: 16px;
+        line-height: 16px;
+    }
+
+    #CampaignMap .button.big {
+        font-size: 32px;
+    }
+
+    #CampaignMap .first-campaign-image {
+        /*top: 40px !important;*/
+    }
+
+    #CampaignMap .view-hint {
+        font-size: 16px;
+    }
+
+    #CampaignMap .view-hint .tooltiptext {
+        font-size: 16px;
+    }
+
+    .mini-shop-window.play-mission .items img {
+        height: 32px;
+        width: 32px;
+    }
+
+    .mini-shop-window.play-mission .store-container .store-item {
+        transform: scale(1.5);
+        margin: 72px;
+    }
+
+    .mini-shop-window.play-mission .items {
+        width: 1200px;
+    }
+
+    .mini-shop-window.play-mission .store-container .store-item .price {
+        width: 216px;
+    }
+
+    .card-wizard-window .items.cards .card.icon {
+        width: 120px;
+        height: 120px;
+    }
+
+    .card-wizard-window .cards {
+        width: 780px;
+    }
+
+    .card-wizard-video-container-spacer {
+        height: 540px;
+    }
+}
+
+/* Weekly Challenge */
+@media screen and (width: 3840px) and (height: 2160px) {
+    #WeeklyChallenge .content-container {
+        transform: scale(1.5);
+    }
+
+    #WeeklyChallenge .leaderboard {
+        font-size: 16px;
+    }
+
+    #WeeklyChallenge .challenge-details {
+        font-size: 16px;
+    }
+
+    #WeeklyChallenge .mission-select .button.big {
+        font-size: 16px;
+        padding: 1rem 4rem;
+    }
+
+    #WeeklyChallenge .main {
+        height: 900px;
+    }
+
+    #WeeklyChallenge .weekly-challenge-main-leaderboard {
+        height: 695px !important;
+    }
+
+    #Singleplayer .mission-select, #WeeklyChallenge .mission-select-subtext {
+        font-size: 16px;
+    }
+
+    #Singleplayer .sidebar, #WeeklyChallenge .sidebar {
+        height: 900px;
+    }
+
+    #WeeklyChallenge .leaderboard td img {
+        width: 32px;
+        height: 32px;
+    }
+
+    #WeeklyChallenge .weekly-challenge-around-me-leaderboard td.name {
+    }
+}
+
+/* Billboards */
+@media screen and (width: 3840px) and (height: 2160px) {
+    img.half-icon {
+        height: 48px;
+        width: 48px;
+    }
+}
+
+/* Misc small resolution stuff */
+@media screen and (width: 1280px) and (height: 720px) {
+    #WeeklyChallenge .challenge-details {
+        font-size: 14px;
+    }
+}
+
+/* Misc 2560x1440 resolution stuff */
+@media screen and (width: 2560px) and (height: 1440px) {
+    .Module.menubuttons {
+        margin-top: 16px;
+    }
+
+    .Module.matchModifiers {
+        margin-top: 10px;
+    }
+}
+
+/* Misc small res stuff */
+@media screen and (max-height: 1079px) {
+    .help-menu .help-list {
+        height: 400px;
+    }
+}
+
+/* Shop stuff */
+@media screen and (width: 3840px) and (height: 2160px) {
+    .store-container .store-item .sale {
+        top: 4px;
+        right: 12px;
+    }
+}
+
+@media screen and (width: 2560px) and (height: 1440px) {
+    .limited-time-goal {
+        margin-bottom: 0px;
+    }
+}
+
+@media screen and (width: 3840px) and (height: 2160px) {
+    .limited-time-goal {
+        margin-bottom: 12px;
+    }
+}
+
+/* template */
+@media screen and (width: 3840px) and (height: 2160px) {
+}

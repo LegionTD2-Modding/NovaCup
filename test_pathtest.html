@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="" />
+    <title>Path test</title>
+</head>
+<body>
+    <div id="main"></div>
+    <style>
+        body {
+            background-color: gray;
+        }
+    </style>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <script type="text/javascript" src="lib/react/react.js"></script>
+    <script type="text/javascript" src="lib/react/react-dom.js"></script>
+
+    <script type="text/javascript">
+        // Request animationFrame https://developer.mozilla.org/en-US/docs/Web/API/window/requestAnimationFrame
+        window.requestAnimationFrame = (function () {
+            return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+        })();
+    </script>
+
+    <script type="text/javascript">
+        var MainApp = React.createClass({
+            render: function () {
+                return (
+                    React.createElement('div', { className: 'MainApp' },
+                        React.createElement(ProgressBar, { height: 48 })
+                    )
+                )
+            }
+        })
+
+        var ProgressBar = React.createClass({
+            propTypes: {
+                height: React.PropTypes.number.isRequired
+            },
+            getInitialState: function () {
+                return {
+                    duration: 0,
+                    startTime: 0,
+                    queued: 0,
+                    enabled: false
+                }
+            },
+            componentWillMount: function () {
+                var parent = this
+                engine.on('toggleTimer', function() {
+                    parent.setState({
+                        enabled: !parent.state.enabled
+                    })
+                }),
+                engine.on('setQueued', function (queued) {
+                    parent.setState({
+                        queued: queued,
+                        enabled: queued > 0
+                    })
+                }),
+                engine.on('startTimer', function (initialProgress, totalSeconds) {
+                    parent.setState({
+                        duration: totalSeconds * 1000,
+                        startTime: new Date().getTime() - totalSeconds * 1000 * initialProgress,
+                        enabled: true
+                    })
+                })
+            },
+            componentDidUpdate: function () {
+                if (this.state.enabled && this.refs.canvas)
+                    this.runCooldown()
+            },
+            render: function () {
+                if (!this.state.enabled) return null
+                return (
+                    React.createElement('div', { className: 'ActionOverlay' },
+                        React.createElement('canvas', {
+                            ref: 'canvas',
+                            height: this.props.height,
+                            width: this.props.height
+                        }),
+                        React.createElement('div', { className: (this.state.queued > 0 ? '' : 'hidden ') },
+                            React.createElement('div', { className: 'background' }),
+                            React.createElement('div', { className: 'value' }, this.state.queued)
+                        )
+                    )
+                )
+            },
+            runCooldown: function () {
+                var now = new Date().getTime()
+                var timeElapsed = now - this.state.startTime
+
+                if (timeElapsed < this.state.duration) {
+                    var canvas = this.refs.canvas
+                    if (!canvas) return
+
+                    var ctx = canvas.getContext('2d')
+                    ctx.setTransform(1, 0, 0, 1, 0, 0)
+                    ctx.clearRect(0, 0, canvas.width, canvas.height)
+                    var timeElapsedPercentage = (this.state.duration == 0) ? 0 : timeElapsed / this.state.duration
+
+                    // Circle fill
+                    var degrees = 360 * timeElapsedPercentage
+                    var radians = (degrees * Math.PI / 180).toFixed(2)
+                    var hypoteneuse = Math.sqrt(Math.pow(canvas.width, 2) + Math.pow(canvas.height, 2))
+                    var r = hypoteneuse / 2
+
+                    ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
+                    ctx.translate(canvas.width / 2, canvas.height / 2) // offset by 0.5 to smoothen a bit
+                    ctx.rotate(-Math.PI / 2)
+
+                    ctx.beginPath()
+
+                    // set style for A and B
+                    ctx.strokeStyle = 'rgba(255, 255, 255, 0.5)'
+                    ctx.lineWidth = 2
+
+                    // A: draw line from (0,0) to (r,0)
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(r, 0)
+                    ctx.stroke()
+
+                    // B: draw line from (0,0) to current point
+                    ctx.moveTo(0, 0)
+                    ctx.lineTo(r * Math.cos(radians), r * Math.sin(radians))
+                    ctx.stroke()
+
+                    // C: arc from current point to end, and fill it in
+                    ctx.arc(0, 0, r, radians, Math.PI * 2, false)
+                    ctx.fill()
+
+                    ctx.closePath()
+
+                    // Simple fill
+                    //ctx.fillStyle = 'rgba(0, 0, 0, 0.5)'
+                    //ctx.fillRect(timeElapsedPercentage * this.props.height,
+                    //    0,
+                    //    this.props.height - timeElapsedPercentage * this.props.height,
+                    //    this.props.height);
+
+                    requestAnimationFrame(this.runCooldown)
+                }
+            }
+        })
+
+
+        ReactDOM.render(React.createElement(MainApp, {}), document.getElementById('main'))
+
+        loopTrain()
+
+        function loopTrain() {
+            //engine.trigger('setQueued', 1)
+            engine.trigger('startTimer', 0, 3)
+
+            //setTimeout(function () {
+            //    engine.trigger('setQueued', 2)
+            //}, 200)
+
+            //setTimeout(function () {
+            //    engine.trigger('setQueued', 3)
+            //}, 1200)
+
+            //setTimeout(function () {
+            //    engine.trigger('setQueued', 2)
+            //    engine.trigger('startTimer', 0, 3)
+            //}, 3000)
+            //setTimeout(function () {
+            //    engine.trigger('setQueued', 1)
+            //    engine.trigger('startTimer', 0, 3)
+            //}, 6000)
+            //setTimeout(function () {
+            //    engine.trigger('setQueued', 0)
+            //}, 9000)
+            setTimeout(loopTrain, 3000)
+        }
+    </script>
+
+    <!-- Load test data after everything is rendered - comment this out in production -->
+
+</body>
+</html>

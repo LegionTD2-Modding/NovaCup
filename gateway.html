@@ -1,0 +1,150 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="" />
+    <link rel="stylesheet" type="text/css" href="hud/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="hud/css/btf.css" />
+    <!-- MAKE SURE THIS IS THE THIRD INDEXED STYLESHEET for purposes of setUIScaling4KEnabled -->
+    <link rel="stylesheet" type="text/css" href="hud/css/4k-overrides.css" />
+    <link rel="stylesheet" type="text/css" href="lib/rangeslider/rangeslider.css" />
+    <link rel="stylesheet" type="text/css" href="lib/flag-icon/flag-icon.css" />
+
+    <title>Legion TD 2 Gateway</title>
+</head>
+<body>
+    <div id="preload"></div>
+    <div id="backer"></div>
+    <div id="main"></div>
+
+    <!-- Load override libraries (libraries which override core JS functionality -->
+    <script type="text/javascript" src="lib/bluebird/bluebird.core.min.js"></script>
+
+    <!-- Load regular libraries -->
+    <script type="text/javascript" src="lib/lodash/lodash.min.js"></script>
+    <script type="text/javascript" src="lib/coherent/coherent.js"></script>
+    <!--<script type="text/javascript" src="lib/react/react-with-addons.js"></script>-->
+    <script type="text/javascript" src="lib/react/react-with-addons.min.js"></script>
+    <!--<script type="text/javascript" src="lib/react/react-dom.js"></script>-->
+    <script type="text/javascript" src="lib/react/react-dom.min.js"></script>
+    <script type="text/javascript" src="lib/velocity/velocity.min.js"></script>
+    <script type="text/javascript" src="lib/velocity/velocity-component.js"></script>
+    <script type="text/javascript" src="lib/velocity/velocity-animate-shim.js"></script>
+    <script type="text/javascript" src="lib/velocity/velocity-transition-group.js"></script>
+    <!--<script type="text/javascript" src="lib/rangeslider/rangeslider.js"></script>-->
+    <script type="text/javascript" src="lib/rangeslider/rangeslider.min.js"></script>
+    <script type="text/javascript" src="lib/chart/Chart.js"></script>
+    <!--<script type="text/javascript" src="lib/chart/Chart.min.js"></script>-->
+    <script type="text/javascript" src="lib/sorttable/sorttable.js"></script>
+    <script type="text/javascript" src="lib/twemoji/twemoji.js"></script>
+    <script type="text/javascript" src="lib/linkify/ba-linkify.js"></script>
+    <script type="text/javascript" src="lib/lazy-load/lazyload.min.js"></script>
+
+    <script type="text/javascript" src="hud/js/preload.js"></script>
+    <script type="text/javascript" src="hud/js/icons.js"></script>
+    <script type="text/javascript" src="hud/js/util.js"></script>
+
+    <!-- Load dependencies first; other stuff depends on these probably -->
+    <script type="text/javascript" src="hud/js/widgets.js"></script>
+    <script type="text/javascript" src="hud/js/global-state.js"></script>
+    <script type="text/javascript" src="hud/js/helpers.js"></script>
+
+    <!-- Load layout after dependencies are loaded -->
+    <script type="text/javascript" src="hud/js/localization.js"></script>
+    <script type="text/javascript" src="hud/js/bindings.js"></script>
+    <script type="text/javascript" src="hud/js/functions.js"></script>
+    <script type="text/javascript" src="hud/js/options.js"></script>
+    <script type="text/javascript" src="hud/js/apps.js"></script>
+
+    <!-- Load views after layout is loaded -->
+    <script type="text/javascript" src="hud/js/animations.js"></script>
+    <script type="text/javascript" src="hud/js/masthead-views.js"></script>
+    <script type="text/javascript" src="hud/js/chat-views.js"></script>
+    <script type="text/javascript" src="hud/js/bottom-bar-views.js"></script>
+    <script type="text/javascript" src="hud/js/sidebar-views.js"></script>
+    <script type="text/javascript" src="hud/js/controls-views.js"></script>
+    <script type="text/javascript" src="hud/js/targetframe-views.js"></script>
+    <script type="text/javascript" src="hud/js/clientmodifiers-views.js"></script>
+    <script type="text/javascript" src="hud/js/matchmodifiers-views.js"></script>
+    <script type="text/javascript" src="hud/js/minimap-views.js"></script>
+    <script type="text/javascript" src="hud/js/menu-views.js"></script>
+    <script type="text/javascript" src="hud/js/menu-launcher-views.js"></script>
+    <script type="text/javascript" src="hud/js/scoreboard-views.js"></script>
+    <script type="text/javascript" src="hud/js/mini-scoreboard-views.js"></script>
+    <script type="text/javascript" src="hud/js/feed-views.js"></script>
+    <script type="text/javascript" src="hud/js/leaderboard-views.js"></script>
+    <script type="text/javascript" src="hud/js/profile-views.js"></script>
+    <script type="text/javascript" src="hud/js/guild-views.js"></script>
+    <script type="text/javascript" src="hud/js/postgame-views.js"></script>
+    <script type="text/javascript" src="hud/js/store-views.js"></script>
+    <script type="text/javascript" src="hud/js/credits.js"></script>
+    <script type="text/javascript" src="hud/js/reroll-views.js"></script>
+    <script type="text/javascript" src="hud/js/codex-views.js"></script>
+    <script type="text/javascript" src="hud/js/guide-views.js"></script>
+    <script type="text/javascript" src="hud/js/singleplayer-views.js"></script>
+    <script type="text/javascript" src="hud/js/spectator-views.js"></script>
+    <script type="text/javascript" src="hud/js/loading-views.js"></script>
+    <script type="text/javascript" src="hud/js/custom-game-views.js"></script>
+    <script type="text/javascript" src="hud/js/searching-views.js"></script>
+    <script type="text/javascript" src="hud/js/legion-select-views.js"></script>
+    <script type="text/javascript" src="hud/js/ingame-views.js"></script>
+    <script type="text/javascript" src="hud/js/popup-views.js"></script>
+    <script type="text/javascript" src="hud/js/button-views.js"></script>
+    <script type="text/javascript" src="hud/js/stackrank-views.js"></script>
+    <script type="text/javascript" src="hud/js/fullscreen-popups.js"></script>
+    <script type="text/javascript" src="hud/js/iconselection-views.js"></script>
+    <script type="text/javascript" src="hud/js/versus-views.js"></script>
+
+    <!-- Load config just before rendering -->
+    <script type="text/javascript" src="hud/js/config.js"></script>
+
+    <!-- Render after everything is loaded -->
+    <script type="text/javascript">
+        var startTime = Date.now()
+        console.log("start loading at " + startTime)
+        window.onload = function () {
+            console.log("done loading at " + Date.now() + " (load time: " + (Date.now() - startTime) + ")")
+
+            if (isUnityHost) {
+                engine.trigger('loadView', 'gateway')
+            }
+
+            ReactDOM.render(React.createElement(PreloaderApp, {}), document.getElementById('preload'))
+        }
+
+        var backer = React.createElement('div', {},
+            React.createElement(WallpaperApp, {})
+        )
+
+        var app = React.createElement('div', {},
+            React.createElement(ClientWatermarkApp, {}),
+            React.createElement(ScoreboardApp, {}),
+            React.createElement(PingChooserApp, {}),
+            React.createElement(EmoteChooserApp, {}),
+            React.createElement(ContextMenu, { width: 200, height: 200 }),
+            React.createElement(MainApp, {}),
+            React.createElement(ClientApp, {}),
+            React.createElement(FullScreenPopupApp, {}),
+            React.createElement(PopupApp, {}) // v6.00: this goes on top, so that popups can show on top of shop previewer
+        )
+
+        ReactDOM.render(backer, document.getElementById('backer'))
+        ReactDOM.render(app, document.getElementById('main'))
+    </script>
+
+    <!-- Load test/log data after everything is rendered (this is ignored if we are in a Coherent environment) -->
+    <script>
+        var isUnityHost = navigator.vendor == 'Apple Computer, Inc.'
+        var isBrowserTest = false // a little more descriptive way to say it
+
+        if (!isUnityHost) {
+            document.write('<script src="hud/js/seed.js">\x3C/script>')
+            document.write('<script src="hud/js/test.js">\x3C/script>')
+            isBrowserTest = true
+        } else {
+            // Run Unity-specific test code (just for temporary fake data)
+        }
+    </script>
+</body>
+</html>
