@@ -467,6 +467,14 @@ var bindings = {
 
     // Limited Time Event
     refreshCurrentQuest: Function.prototype,
+
+    // Menu
+    getTournamentMenu: Function.prototype,
+
+    // Tournament
+    tournamentEnabled: true,
+    tournamentNova: 'NovaCup',
+    tournamentSubtitle: 'October 2023'
 }
 
 // Always on

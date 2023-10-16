@@ -1,8 +1,8 @@
 ﻿// Configurable menu items
 // ==================================================================================
 
-import BracketsRender from "./brackets-render";
-import {createElement} from "../../lib/react/react-with-addons";
+//import BracketsRender from "./brackets-render";
+//import {createElement} from "lib/react/react-with-addons";
 
 var loadConfig = function () {
     var Filler = React.createClass({
@@ -12,7 +12,7 @@ var loadConfig = function () {
         render: function () {
             var index = this.props.index
             return (
-                createElement('div', {},
+                React.createElement('div', {},
                     index == 0 && React.createElement('div', {},
                         "The original Legion TD went beyond our wildest dreams to become played by over a million people! "
                         + " It's now becoming a full-fledged game. The first ever competitive TD for PC."

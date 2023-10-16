@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+//import React, { useEffect } from 'react';
 
 const DATA_URL = '../data/db-brackets.json';
 
@@ -18,7 +18,7 @@ function BracketsRender() {
         render();
     }, []);
 
-    return <div className="brackets-viewer"></div>
+    return '<div className="brackets-viewer"></div>'
 }
 
-export default BracketsRender;
+//export default BracketsRender;

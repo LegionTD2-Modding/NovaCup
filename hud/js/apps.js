@@ -348,8 +348,8 @@ var ClientApp = React.createClass({
                     break
                 case 'launcher':
                     preloadCoreImages()
-                    //parent.setState({ items: gatewayMenu, menuStyle: 4, menuRoot: 'launcher' }, function () { console.log("Done " + Date.now()) })
-                    if (!isUnityHost) engine.trigger('refreshIsInGame', false) // Smelly test code
+                    parent.setState({ items: getLauncherMenu(), menuStyle: 0, menuRoot: 'launcher' }, function () { console.log("Done " + Date.now()) })
+                    //if (!isUnityHost) engine.trigger('refreshIsInGame', false) // Smelly test code
                     break
                 case 'game':
                     parent.setState({ items: [], menuStyle: -1, menuRoot: 'game' }, function () { console.log("Done " + Date.now()) })
@@ -378,9 +378,6 @@ var ClientApp = React.createClass({
                     parent.setState({ items: getCampaignsMenu(), menuStyle: 2.1 })
                     break
                 case 'initialexperience':
-                    parent.setState({ items: getInitialExperienceMenu(), menuStyle: 2.1, disableBackButton: true })
-                    break
-                case 'tournament':
                     parent.setState({ items: getInitialExperienceMenu(), menuStyle: 2.1, disableBackButton: true })
                     break
                 case 'patch notes':
@@ -430,11 +427,10 @@ var ClientApp = React.createClass({
                         engine.trigger('loadView', 'game')
                         return
                     }
-
                     parent.setState({ items: getPregameMenu(), menuStyle: 8, disableBackButton: true, narrow: true, menuRoot: 'pregame' })
                     break
                 case 'loading':
-                    parent.setState({ items: [], menuStyle: 6, disableBackButton: true })
+                    parent.setState({ items: [], menuStyle: 6, disableBackButton: true, menuRoot: 'loading' })
                     break
                 case 'browser':
                     parent.setState({ items: [], menuStyle: 7 })
@@ -452,7 +448,7 @@ var ClientApp = React.createClass({
                     break
                 case 'tournament':
                     parent.setState({
-                        items: getTournamentMenu(), menuStyle: 1, enableApplyButton: true, menuRoot: 'tournament'
+                        items: postTournamentMenu, menuStyle: 1
                     })
                     break
                 case 'postgame':
